@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Main{
         static int dayNum = 0; 
         static ArrayList<String> userInventory; 
