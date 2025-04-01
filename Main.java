@@ -10,7 +10,12 @@ public class Main{
             if(dayNum == 12){
                 System.out.println("Your saved");
             }
-            String userResponse = collector.nextString();
+            String user = collector.nextString();
+            if(dayNum == 1){
+                System.out.println("Now that you're all caught up, why don't you chose the base that you would like to live in over the next 12 day.")
+            }
+
+            
         }
         
     }
