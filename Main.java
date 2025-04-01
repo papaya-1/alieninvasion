@@ -11,7 +11,7 @@ public class Main{
             }
             String user = collector.nextString();
             if(dayNum == 1){
-                
+                System.out.println("Now that you're all caught up, why don't you chose the base that you would like to live in over the next 12 day.")
             }
 
             
