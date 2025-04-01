@@ -1,22 +1,13 @@
 import java.util.ArrayList;
 public class User extends Entities{
-    private String name;
     private ArrayList <String> inventory;
 
     public User(){
         super();
-        name = "unknown";
     }
-    public User(String type, int defense, int health, boolean isAlive, String name, ArrayList <String> inventory){
+    public User(String type, int defense, int health, boolean isAlive, ArrayList <String> inventory){
         super(type, defense, health, isAlive);
-        this.name = name;
         this.inventory = inventory;
-    }
-    public String getName(){
-        return name;
-    }
-    public void setName(String n){
-        name = n;
     }
 
     public void addtoInventory(String x){
