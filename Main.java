@@ -1,9 +1,12 @@
 import java.util.Scanner;
 public class Main{
-        int dayNum = 0; 
+        static int dayNum = 0; 
     public static void main (String[] args){
-        
-
+        Scanner collector = new Scanner(System.in);
+        System.out.println("Intro");
+        while(dayNum < 12){
+            String userResponse = collector.nextString();
+        }
         
     }
 }
