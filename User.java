@@ -5,7 +5,7 @@ public class User extends Entities{
 
     public User(){
         super();
-        name = "unknown";
+        name = "uknown";
     }
     public User(String type, int defense, int health, boolean isAlive, String name, ArrayList <String> inventory){
         super(type, defense, health, isAlive);
