@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 public class User extends Entities{
+    
     private ArrayList <String> inventory;
 
     public User(){
         super();
     }
+    
     public User(String type, int defense, int health, boolean isAlive, ArrayList <String> inventory){
         super(type, defense, health, isAlive);
         this.inventory = inventory;
