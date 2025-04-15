@@ -4,9 +4,9 @@ public class Main{
         static int dayNum = 1; 
         static ArrayList<String> userInventory; 
         static boolean baseSelected = false;
-        static Base a = new Base("", 0, 0, 50, false);
-        static Base b = new Base("", 0, 0, 50, false);
-        static Base c = new Base("", 0, 0, 50, false);
+        static Base a = new Base("shack", 4, 4, 50, false); // 5x5 grid
+        static Base b = new Base("apartment", 1, 2, 50, false);
+        static Base c = new Base("house", 2, 0, 50, false);
     public static void main (String[] args){
         Scanner collector = new Scanner(System.in);
         System.out.println("You come from summer break to find that your town has been invaded by alien! No one else is around, but luckily help is arriving in 12 days. You'll need to find a base, maintain it, and get food and survive alien attacks to keep your health up until help arrives.");
