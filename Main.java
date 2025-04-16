@@ -4,12 +4,16 @@ public class Main{
         static int dayNum = 1; 
         static ArrayList<String> userInventory; 
         static boolean baseSelected = false;
+        static boolean morningChoice = false;
+        static boolean alienEncountered = false;
+        static boolean stayHomed = false; 
+        static boolean mainChoice = false;
         static Base a = new Base(" shack", 4, 4, 50, false); // 5x5 grid
         static Base b = new Base(" apartment", 1, 2, 50, false);
         static Base c = new Base(" house", 2, 0, 50, false);
         static Base chosen;
+        static Scanner collector = new Scanner(System.in);
     public static void main (String[] args){
-        Scanner collector = new Scanner(System.in);
         System.out.println("You come from summer break to find that your town has been invaded by aliens! No one else is around, but luckily help is arriving in 12 days. You'll need to survive in your 5x5 town by finding a base, maintaining it, geting food, and remain alive all through alien attacks to keep your health up until help arrives.");
         System.out.println("");
         User user = new User("human", 50, 100, true, userInventory);
@@ -24,11 +28,20 @@ public class Main{
                 System.out.println("3)" + c);
                 String resp = collector.nextLine();
                 System.out.println(getResponse(resp));
+                morningChoice = false;
+                alienEncountered = false;
+                stayHomed = false;
+                mainChoice = false;
                 dayNum++;
             } 
             else{
                 String resp = collector.nextLine();
+                enactDay();
                 //stuff here for regular days 
+                morningChoice = false; //reset all other day choices here so that the computer knows //remember to set true each times these things happen
+                alienEncountered = false;
+                stayHomed = false;
+                mainChoice = false;
                 dayNum++;
             }
         }
@@ -53,6 +66,35 @@ public class Main{
                 gameResp += "That is not a valid selection. Please try again and this time, enter a number";
             }
         }
+        else if (morningChoice == false){
+            //for when user makes the choice for the first activity, checks which option you chose and provides response
+            morningChoice = true;
+        }
+        else if (mainChoice == false){
+            //for when user makes the choice for the second activtiy, checks which option you chose and provides response
+            mainChoice = true; //make sure this is the spot to put this
+        }
+        else if (alienEncountered == false && stayHomed == false){
+            // for getResp when you choose to go out and get supplies
+            alienEncountered = true;
+        }
+        else if (stayHomed == true){
+            // for getResp when you choose to stay home
+        }
         return gameResp;
+    }
+
+    public static void enactDay(){
+        System.out.println("Day " + dayNum + "has begun!");
+        System.out.println("Would you like to first...");
+        System.out.println("1. Eat");
+        System.out.println("2. Check inventory/stats");
+        System.out.println("3. Take medicine");
+        System.out.println("Choose a number!!!");
+        String resp = collector.nextLine();
+        getResponse(resp);
+        System.out.println("Now choose your next activity...");
+        System.out.println("1. Go to store/gather supplies");
+
     }
 }
