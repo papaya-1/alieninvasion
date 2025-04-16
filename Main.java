@@ -10,7 +10,7 @@ public class Main{
         static Base chosen;
     public static void main (String[] args){
         Scanner collector = new Scanner(System.in);
-        System.out.println("You come from summer break to find that your town has been invaded by aliens! No one else is around, but luckily help is arriving in 12 days. You'll need to find a base, maintain it, get food, and survive alien attacks to keep your health up until help arrives.");
+        System.out.println("You come from summer break to find that your town has been invaded by aliens! No one else is around, but luckily help is arriving in 12 days. You'll need to survive in your 5x5 town by finding a base, maintaining it, geting food, and remain alive all through alien attacks to keep your health up until help arrives.");
         System.out.println("");
         User user = new User("human", 50, 100, true, userInventory);
         while(dayNum <= 12 && user.getIsAlive()){
