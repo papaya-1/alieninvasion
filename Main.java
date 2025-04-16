@@ -7,6 +7,7 @@ public class Main{
         static Base a = new Base(" shack", 4, 4, 50, false); // 5x5 grid
         static Base b = new Base(" apartment", 1, 2, 50, false);
         static Base c = new Base(" house", 2, 0, 50, false);
+        static Base chosen;
     public static void main (String[] args){
         Scanner collector = new Scanner(System.in);
         System.out.println("You come from summer break to find that your town has been invaded by alien! No one else is around, but luckily help is arriving in 12 days. You'll need to find a base, maintain it, get food, and survive alien attacks to keep your health up until help arrives.");
@@ -38,12 +39,15 @@ public class Main{
         if (baseSelected == false){
             if (x.equals("1")){
                 gameResp += "You have selected " + a; //Include whatever the user has to do to move on from here, perhaps a method for daily activties 
+                chosen = a;
             }
             else if(x.equals("2")){
                 gameResp += "You have selected " + b;
+                chosen = b;
             }
             else if (x.equals("3")){
                 gameResp += "You have selected " + c;
+                chosen = c;
             }
             else{
                 gameResp += "That is not a valid selection. Please try again and this time, enter a number";
