@@ -28,6 +28,7 @@ public class Main{
                 System.out.println("3)" + c);
                 String resp = collector.nextLine();
                 System.out.println(getResponse(resp));
+                enactNight(user,chosen);
                 morningChoice = false;
                 alienEncountered = false;
                 stayHomed = false;
@@ -97,4 +98,19 @@ public class Main{
         System.out.println("1. Go to store/gather supplies");
 
     }
+    public static void enactNight(User user, Base chosen){
+        System.out.println("It is now  nighttime and you must sleep to prepare for yout next day. Take the next few moments to rest up. Zzzzzz Zzzzzzzzzzzzz Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+        System.out.println("(please wait a moment for the next morning to start)");
+        try{
+        Thread.sleep(5000);
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        chosen.setProtectionLevel(chosen.getProtectionLevel()-10);
+        user.setHealth(user.getHealth()+10);
+        System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health to "+ user.getHealth());
+
+    }
+
 }
