@@ -94,10 +94,20 @@ public class Main{
         System.out.println("Choose a number!!!");
         String resp = collector.nextLine();
         getResponse(resp);
-        System.out.println("Now choose your next activity...");
+        System.out.println("Now choose your daily activity...");
         System.out.println("1. Go to store/gather supplies");
-
+        System.out.println("2. Make repairs to your house");
+        System.out.println("3. Stay home");
+        System.out.println("Choose a number!!!");
+        getResponse(resp);
+        System.out.println("The day is coming to an end! Choose your evening activity");
+        System.out.println("1. Check inventory/stats");
+        System.out.println("2. Eat");
+        System.out.println("3. Take medicine");
+        getResponse(resp);
+        System.out.println("The day has ended!");
     }
+    
     public static void enactNight(User user, Base chosen){
         System.out.println("It is now  nighttime and you must sleep to prepare for yout next day. Take the next few moments to rest up. Zzzzzz Zzzzzzzzzzzzz Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
         System.out.println("(please wait a moment for the next morning to start)");
