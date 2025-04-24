@@ -28,6 +28,7 @@ public class Main{
                 System.out.println("3)" + c);
                 String resp = collector.nextLine();
                 System.out.println(getResponse(resp));
+                enactDay();
                 enactNight(user,chosen);
                 morningChoice = false;
                 alienEncountered = false;
@@ -38,6 +39,7 @@ public class Main{
             else{
                 String resp = collector.nextLine();
                 enactDay();
+                enactNight(user,chosen);
                 //stuff here for regular days 
                 morningChoice = false; //reset all other day choices here so that the computer knows //remember to set true each times these things happen
                 alienEncountered = false;
@@ -69,6 +71,15 @@ public class Main{
         }
         else if (morningChoice == false){
             //for when user makes the choice for the first activity, checks which option you chose and provides response
+            if (x.equals("1")){
+                //the user has chosen to eat, display inventory, allow for choice, update inventory 
+            }
+            else if (x.equals("2")){
+                //the user has chosen to check stats/inventory, display stats/inventory  
+            }
+            else if (x.equals("3")){
+                //the user has chosen to take meds, return no meds if there are no meds and if there are update them
+            }
             morningChoice = true;
         }
         else if (mainChoice == false){
