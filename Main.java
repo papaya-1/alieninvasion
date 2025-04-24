@@ -6,7 +6,7 @@ public class Main{
         static boolean baseSelected = false;
         static boolean morningChoice = false;
         static boolean alienEncountered = false;
-        static boolean stayHomed = false; 
+        static boolean stayedHome = false; 
         static boolean mainChoice = false;
         static Base a = new Base(" shack", 4, 4, 50, false); // 5x5 grid
         static Base b = new Base(" apartment", 1, 2, 50, false);
@@ -32,7 +32,7 @@ public class Main{
                 enactNight(user,chosen);
                 morningChoice = false;
                 alienEncountered = false;
-                stayHomed = false;
+                stayedHome = false;
                 mainChoice = false;
                 dayNum++;
             } 
@@ -42,7 +42,7 @@ public class Main{
                 //stuff here for regular days 
                 morningChoice = false; //reset all other day choices here so that the computer knows //remember to set true each times these things happen
                 alienEncountered = false;
-                stayHomed = false;
+                stayedHome = false;
                 mainChoice = false;
                 dayNum++;
             }
@@ -138,10 +138,10 @@ public class Main{
             }
             mainChoice = true; //make sure this is the spot to put this
         }
-        else if (alienEncountered == false && stayHomed == false){ // for getResp when you choose to go out and get supplies
+        else if (alienEncountered == false && stayedHome == false){ // for getResp when you choose to go out and get supplies
             alienEncountered = true;
         }
-        else if (stayHomed == true){
+        else if (stayedHome == true){
             // for getResp when you choose to stay home
         }
         return gameResp;
