@@ -1,18 +1,38 @@
 import java.util.ArrayList;
 public class User extends Entities{
     
-    private ArrayList <String> inventory;
+    private ArrayList <Item> inventory;
 
     public User(){
         super();
     }
     
-    public User(String type, int defense, int health, boolean isAlive, ArrayList <String> inventory){
+    public User(String type, int defense, int health, boolean isAlive, ArrayList <Item> inventory){
         super(type, defense, health, isAlive);
         this.inventory = inventory;
     }
 
-    public void addtoInventory(String x){
+    public void addDefense(int x){
+        defense += x;
+    }
+
+    public void minusDefense(int x){
+        defense -= x;
+    }
+
+    public void plusHealth(int x){
+        health += x;
+    }
+
+    public void minusHealth(int x){
+        health -= x;
+    }
+
+    public void changeLifeStatus(boolean x){
+        isAlive = x;
+    }
+
+    public void addtoInventory(Item x){
         inventory.add(x);
     }
 

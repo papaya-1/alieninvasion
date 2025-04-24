@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class Main{
         static int dayNum = 1; 
-        static ArrayList<String> userInventory; 
+        static ArrayList<Item> userInventory = new ArrayList<Item>();
         static boolean baseSelected = false;
         static boolean morningChoice = false;
         static boolean alienEncountered = false;
@@ -12,11 +12,11 @@ public class Main{
         static Base b = new Base(" apartment", 1, 2, 50, false);
         static Base c = new Base(" house", 2, 0, 50, false);
         static Base chosen;
+        static User user = new User("human", 50, 100, true, userInventory);
         static Scanner collector = new Scanner(System.in);
     public static void main (String[] args){
         System.out.println("You come from summer break to find that your town has been invaded by aliens! No one else is around, but luckily help is arriving in 12 days. You'll need to survive in your 5x5 town by finding a base, maintaining it, geting food, and remain alive all through alien attacks to keep your health up until help arrives.");
         System.out.println("");
-        User user = new User("human", 50, 100, true, userInventory);
         while(dayNum <= 12 && user.getIsAlive()){
             if(dayNum == 12){
                 System.out.println("You have been saved! /(^^)/");
@@ -75,6 +75,42 @@ public class Main{
         else if (morningChoice == false){ //morning activity 
             if (x.equals("1")){
                 //the user has chosen to eat, display inventory, allow for choice, update inventory/health 
+                System.out.println("Select a consumable item in your inventory");
+                System.out.println("Note: if you are unsure if an item is consumable, check whether it has a health boost. Items without a health boost are not food");
+                //later create a seperate display inventory for food 
+                displayInventory();
+                if (userInventory.size() == 0){
+                }
+                else{
+                    String resp = collector.nextLine();
+                //include inventory max of 5 items whenever option comes up to add item 
+                    if (resp.equals("1")){
+                        user.plusHealth(userInventory.get(0).getHealthBoost());
+                        //add how you would use an attack items 
+                        System.out.println("You have consumed " + userInventory.get(0).getName() + ".");
+                        userInventory.remove(0);
+                    }
+                    else if (resp.equals("2")){
+                        user.plusHealth(userInventory.get(1).getHealthBoost());
+                        System.out.println("You have consumed " + userInventory.get(1).getName() + ".");
+                        userInventory.remove(1);
+                    }
+                    else if (resp.equals("3")){
+                        user.plusHealth(userInventory.get(2).getHealthBoost());
+                        System.out.println("You have consumed " + userInventory.get(2).getName() + ".");
+                        userInventory.remove(2);
+                    }
+                    else if (resp.equals("4")){
+                        user.plusHealth(userInventory.get(3).getHealthBoost());
+                        System.out.println("You have consumed " + userInventory.get(3).getName() + ".");
+                        userInventory.remove(3);
+                    }
+                    else if (resp.equals("5")){
+                        user.plusHealth(userInventory.get(4).getHealthBoost());
+                        System.out.println("You have consumed " + userInventory.get(4).getName() + ".");
+                        userInventory.remove(4);
+                    }
+                }
                 morningChoice = true;
             }
             else if (x.equals("2")){
@@ -112,7 +148,7 @@ public class Main{
     }
 
     public static void enactDay(){
-        System.out.println("Day " + dayNum + "has begun!");
+        System.out.println("Day " + dayNum + " has begun!");
         System.out.println("Would you like to first...");
         System.out.println("1. Eat");
         System.out.println("2. Check inventory/stats");
@@ -125,11 +161,13 @@ public class Main{
         System.out.println("2. Make repairs to your house");
         System.out.println("3. Stay home");
         System.out.println("Choose a number!!!");
+        resp = collector.nextLine();
         getResponse(resp);
         System.out.println("The day is coming to an end! Choose your evening activity");
         System.out.println("1. Check inventory/stats");
         System.out.println("2. Eat");
         System.out.println("3. Take medicine");
+        resp = collector.nextLine();
         getResponse(resp);
         System.out.println("The day has ended!");
     }
@@ -147,6 +185,17 @@ public class Main{
         user.setHealth(user.getHealth()+10);
         System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health to "+ user.getHealth());
 
+    }
+
+    public static void displayInventory(){
+        if (userInventory.size() != 0){
+            for (int i = 0; i < userInventory.size(); i++){
+                System.out.println(i+1 + ") " + userInventory.get(i));
+            }
+        }
+        else{
+            System.out.println("There are no items in your inventory");
+        }
     }
 
 }

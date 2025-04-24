@@ -12,7 +12,31 @@ public class Item{
         this.attackCapability = attackCapability; 
     } 
 
-    public String toString(){
-        return name + " has a defense boost of " + defenseBoost + ", a health boost of " +  healthBoost + ", and an attack capability of " + attackCapability; 
+    public Item(String name){
+        this.name = name;
+        healthBoost = 0;
+        defenseBoost = 0;
+        attackCapability = 0; 
     }
+
+    public String toString(){
+        return name + " with a defense boost of " + defenseBoost + ", a health boost of " +  healthBoost + ", and an attack capability of " + attackCapability; 
+    }
+
+    public int getDefBoost(){
+        return defenseBoost;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public int getHealthBoost(){
+        return healthBoost;
+    }
+
+    public int getAttackCap(){
+        return attackCapability;
+    }
+
 }

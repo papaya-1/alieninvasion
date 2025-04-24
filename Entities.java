@@ -1,8 +1,8 @@
 public class Entities{
     private String type;
-    private int defense;
-    private int health;
-    private boolean isAlive;
+    protected int defense;
+    protected int health;
+    protected boolean isAlive;
 
     public Entities(){
         type = "unknown";
