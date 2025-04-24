@@ -52,42 +52,58 @@ public class Main{
 
     public static String getResponse(String x){
         String gameResp = "";
-        if (baseSelected == false){
+        if (baseSelected == false){ // when user has selected base
             if (x.equals("1")){
-                gameResp += "You have selected " + a; //Include whatever the user has to do to move on from here, perhaps a method for daily activties 
+                gameResp += "You have selected " + a; 
                 chosen = a;
+                baseSelected = true;
             }
             else if(x.equals("2")){
                 gameResp += "You have selected " + b;
                 chosen = b;
+                baseSelected = true;
             }
             else if (x.equals("3")){
                 gameResp += "You have selected " + c;
                 chosen = c;
+                baseSelected = true;
             }
             else{
                 gameResp += "That is not a valid selection. Please try again and this time, enter a number";
+                baseSelected = false;
             }
         }
-        else if (morningChoice == false){
-            //for when user makes the choice for the first activity, checks which option you chose and provides response
+        else if (morningChoice == false){ //morning activity 
             if (x.equals("1")){
-                //the user has chosen to eat, display inventory, allow for choice, update inventory 
+                //the user has chosen to eat, display inventory, allow for choice, update inventory/health 
+                morningChoice = true;
             }
             else if (x.equals("2")){
                 //the user has chosen to check stats/inventory, display stats/inventory  
+                morningChoice = true;
             }
             else if (x.equals("3")){
                 //the user has chosen to take meds, return no meds if there are no meds and if there are update them
+                morningChoice = true;
             }
-            morningChoice = true;
+            else{
+                gameResp += "That is not a valid selection. Please try again and this time, enter a number";
+                morningChoice = false;
+            }
         }
-        else if (mainChoice == false){
-            //for when user makes the choice for the second activtiy, checks which option you chose and provides response
+        else if (mainChoice == false){ //main activity
+            if (x.equals("1")){
+                //user chooses to go to store
+            }
+            else if (x.equals("2")){
+                //user choose to make home repairs
+            }
+            else if (x.equals("3")){
+                //user chooses to stay home 
+            }
             mainChoice = true; //make sure this is the spot to put this
         }
-        else if (alienEncountered == false && stayHomed == false){
-            // for getResp when you choose to go out and get supplies
+        else if (alienEncountered == false && stayHomed == false){ // for getResp when you choose to go out and get supplies
             alienEncountered = true;
         }
         else if (stayHomed == true){
