@@ -1,0 +1,18 @@
+public class Item{
+
+    private String name; 
+    private int healthBoost;
+    private int defenseBoost;
+    private int attackCapability;
+
+    public Item(String name, int healthBoost, int defenseBoost, int attackCapability){
+        this.name = name; 
+        this.healthBoost = healthBoost;
+        this.defenseBoost = defenseBoost;
+        this.attackCapability = attackCapability; 
+    } 
+
+    public String toString(){
+        return name + " has a defense boost of " + defenseBoost + ", a health boost of " +  healthBoost + ", and an attack capability of " + attackCapibility; 
+    }
+}

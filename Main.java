@@ -37,7 +37,6 @@ public class Main{
                 dayNum++;
             } 
             else{
-                String resp = collector.nextLine();
                 enactDay();
                 enactNight(user,chosen);
                 //stuff here for regular days 
