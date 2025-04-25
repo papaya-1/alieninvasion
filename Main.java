@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class Main{
         static int dayNum = 1; 
+        //keeps track of user's stufff
         static ArrayList<Item> userInventory = new ArrayList<Item>();
         //since the user always types in 1, 2, 3..., we need to know what prompt they are answering. This keeps track of what prompt has and hasn't been answered 
         static boolean baseSelected = false; 
@@ -9,6 +10,7 @@ public class Main{
         static boolean alienEncountered = false;
         static boolean stayedHome = false; 
         static boolean mainChoice = false;
+        //keeps track of store inventroy 
         static ArrayList<Item> hardwareInventory = new ArrayList<Item>();
         static ArrayList<Item> groceryInventory = new ArrayList<Item>();
         static ArrayList<Item> pharmacyInventory = new ArrayList<Item>();
@@ -32,12 +34,15 @@ public class Main{
         static Item banana = new Item("Banana", 10, 0, 0);
         static Item bread = new Item("Bread", 20, 0, 0);
         static Item muffins = new Item("Muffins", 15, 0, 0);
-        //housing 
+        //housing options 
         static Base a = new Base(" shack", 4, 4, 50, false); // 5x5 grid
         static Base b = new Base(" apartment", 1, 2, 50, false);
         static Base c = new Base(" house", 2, 0, 50, false);
-        static Base chosen; //keeps track of what base the user is using 
-        static User user = new User("human", 50, 100, true, userInventory); //this is the user themselves 
+        //keeps track of what base the user is using 
+        static Base chosen; 
+        //creates a user 
+        static User user = new User("human", 50, 100, true, userInventory);
+        //takes in user input
         static Scanner collector = new Scanner(System.in);
     public static void main (String[] args){
         //adding items to store inventories 
@@ -172,7 +177,7 @@ public class Main{
             }
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
                 System.out.println("");
-                System.out.println("Currently, you are alive, as you health is at "+user.getHealth()+ " and your defense is at "+user.getDefense());
+                System.out.println("Currently, you are alive, as your health is at "+user.getHealth()+ " and your defense is at "+user.getDefense());
                 System.out.print(". In your Inventory, you have: ");
                 System.out.println("");
                 displayInventory();
