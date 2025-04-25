@@ -3,17 +3,36 @@ import java.util.ArrayList;
 public class Main{
         static int dayNum = 1; 
         static ArrayList<Item> userInventory = new ArrayList<Item>();
-        static boolean baseSelected = false; //since the user always types in 1, 2, 3..., we need to know what prompt they are answering. This keeps track of what prompt has and hasn't been answered 
+        //since the user always types in 1, 2, 3..., we need to know what prompt they are answering. This keeps track of what prompt has and hasn't been answered 
+        static boolean baseSelected = false; 
         static boolean morningChoice = false;
         static boolean alienEncountered = false;
         static boolean stayedHome = false; 
         static boolean mainChoice = false;
-        static ArrayList<Item> hardwareInventory;
-        static ArrayList<Item> groceryInventory;
-        static ArrayList<Item> pharmacyInventory; 
-        //static Store hardware = new Store("Home-Depot", 0, 0, hardwareInventory);
-        //static Store grocery = new Store("Safeway", 0, 3, groceryInventory);
-        ///static Store pharmacy = new 
+        static ArrayList<Item> hardwareInventory = new ArrayList<Item>();
+        static ArrayList<Item> groceryInventory = new ArrayList<Item>();
+        static ArrayList<Item> pharmacyInventory = new ArrayList<Item>();
+        //stores 
+        static Store hardware = new Store("Home-Depot", 0, 0, hardwareInventory);
+        static Store grocery = new Store("Safeway", 2, 2, groceryInventory);
+        static Store pharmacy = new Store("Walgreens", 4, 2, pharmacyInventory);
+        //store stock 
+            //home depot items 
+        static Item ductTape = new Item("Duct tape", 0, 10, 0);
+        static Item sandBags = new Item ("Sanbag", 0, 20, 0);
+        static Item woodenPlanks = new Item ("Wooden planks", 0, 15, 0);        
+        static Item waterGun = new Item("Watergun", 0, 0, 10); //Let's pretend home depot has this
+        static Item stick = new Item("Stick", 0, 0, 15);
+        static Item shovel = new Item("Shovel", 0, 0, 20);
+            //walgreens items 
+        static Item coldMedicine = new Item("Cold medicine", 10, 0, 0);
+        static Item bandages = new Item("Bandages", 15, 0, 0);
+        static Item tylenol = new Item("Tylenol", 20, 0, 0);
+            //safeway items 
+        static Item banana = new Item("Banana", 10, 0, 0);
+        static Item bread = new Item("Bread", 20, 0, 0);
+        static Item muffins = new Item("Muffins", 15, 0, 0);
+        //housing 
         static Base a = new Base(" shack", 4, 4, 50, false); // 5x5 grid
         static Base b = new Base(" apartment", 1, 2, 50, false);
         static Base c = new Base(" house", 2, 0, 50, false);
@@ -21,11 +40,26 @@ public class Main{
         static User user = new User("human", 50, 100, true, userInventory); //this is the user themselves 
         static Scanner collector = new Scanner(System.in);
     public static void main (String[] args){
-        System.out.println(""); //introduction 
+        //adding items to store inventories 
+        hardwareInventory.add(ductTape);
+        hardwareInventory.add(sandBags);
+        hardwareInventory.add(woodenPlanks);
+        hardwareInventory.add(waterGun);
+        hardwareInventory.add(stick);
+        hardwareInventory.add(shovel);
+        pharmacyInventory.add(coldMedicine);
+        pharmacyInventory.add(bandages);
+        pharmacyInventory.add(tylenol);
+        groceryInventory.add(banana);
+        groceryInventory.add(muffins);
+        groceryInventory.add(bread);
+        //introduction 
+        System.out.println(""); 
         System.out.println("You come from summer break to find that your town has been invaded by aliens! \nNo one else is around, but luckily help is arriving in 12 days. \nYou'll need to survive in your 5x5 town by finding a base, maintaining it, geting food, and remain alive all through alien attacks to keep your health up until help arrives.");
         System.out.println("Note: to select any options in this game, you must choose a number");
         System.out.println("");
-        try{ //pause between introduction and start of game  
+        //pause between introduction and start of game  
+        try{ 
             Thread.sleep(3000);
         }
         catch (InterruptedException e){
@@ -201,9 +235,8 @@ public class Main{
         }
         else if (mainChoice == false){ //main activity
             if (x.equals("1") || x.equals(" 1")){ //user chooses to go to store
+                //include choice of what store to go to here, later factor distance into monster attack danger 
                 mainChoice = true;
-                //include choice of what store to go to here 
-                
             }
             else if (x.equals("2") || x.equals(" 2")){ //user choose to make home repairs
                 mainChoice = true;

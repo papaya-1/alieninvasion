@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 public class Store extends Place{
 
-    private ArrayList<String> items;
+    private ArrayList<Item> items;
     
-    public Store(String name, int x, int y, ArrayList<String> items){
+    public Store(String name, int x, int y, ArrayList<Item> items){
         super(name, x, y);
         this.items = items;
     }
@@ -13,10 +13,10 @@ public class Store extends Place{
         int numIndex = 1; 
         for(int i = 0; i < items.size(); i++){
             if (i == items.size()-1){
-                description += numIndex + items.get(i) + ".";
+                description += numIndex + ") "+ items.get(i) + ".";
             }
             else{
-            description += numIndex + ". " + items.get(i) + ", ";
+            description += numIndex + ") " + items.get(i) + ", ";
             numIndex++;
             }
         }
@@ -25,7 +25,7 @@ public class Store extends Place{
 
     public String getItem(int num){
         int index = num - 1;
-        String x = items.get(index);
+        String x = items.get(index).toString();
         return x;
     }
 
