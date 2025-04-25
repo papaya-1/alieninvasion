@@ -131,6 +131,18 @@ public class Main{
                 morningChoice = true;
             }
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
+                System.out.println("");
+                System.out.println("Currently, you are alive, as you health is at "+user.getHealth()+ " and your defense is at "+user.getDefense());
+                System.out.print(". In your Inventory, you have ");
+                if(userInventory.size()==0){
+                    System.out.print("nothing.");
+                }
+                else{
+                    for(int i=0; i<userInventory.size(); i++){
+                    System.out.println(userInventory.get(i));
+                }
+            }
+                System.out.println("");
                 morningChoice = true;
             }
             else if (x.equals("3") || x.equals(" 3")){ //user chooses to take medicine 
@@ -163,8 +175,15 @@ public class Main{
             alienEncountered = true;
         }
         else if (stayedHome == true){//for getResp when you choose to stay home
+            System.out.println("");
+            System.out.println("You have decided to spend the afternoon at home.(cough lazy cough cough)");
+            System.out.println("");
             //stayedHome = false; here if you have other options after this
         }
+       /* else if(goToStore == true){ //when going to store equals true
+
+       }
+       */
     }
 
     public static void enactDay(){
@@ -189,7 +208,7 @@ public class Main{
         System.out.println("Now choose your daily activity...");
         System.out.println("1. Go to store/gather supplies");
         System.out.println("2. Make repairs to your house");
-        System.out.println("3. Stay home");
+        System.out.println("3. Stay home (with this choice, you essentually foreit doing an afternoon activiy today)");
         resp = collector.nextLine();
         getResponse(resp);
         System.out.println("The day is coming to an end! Choose your evening activity");
@@ -198,7 +217,7 @@ public class Main{
         System.out.println("3. Take medicine");
         resp = collector.nextLine();
         getResponse(resp);
-        System.out.println("The day has ended!");
+        System.out.println("The last sunlight of the day fades away, as the day draws to a close. You will have another chance to improve to situation and make it until help arrives tomorrow.");
     }
     
     public static void enactNight(User user, Base chosen){
@@ -229,6 +248,63 @@ public class Main{
         }
         else{
             System.out.println("There are no items in your inventory");
+        }
+    }
+    public static void possibleAlienEncounter(){
+        int chance = (int)(Math.random()*101); // 101 is 100 inclusive, right?
+        if (chance <=50){
+            System.out.println("");
+            System.out.println("you have made it through without encountering an alien");
+            System.out.println("");
+
+        }
+        else{
+            System.out.println("");
+            System.out.println("you have had the unfortunate luck of encountering an alien. You have three choices:");
+            System.out.println("1) run away, but end activity, lose all inventory, and potentially lose health (90% success)");
+            System.out.println("2) defend, and potentiallly lose health (60% success)");
+            System.out.println("3) attack, and potentially lose health and all inventory(30% success)");
+            System.out.println("");
+            /* resp = collector.nextLine();
+           int success = (int)(Math.random()*101); 101 is 100 inclusive, right?
+            if (x.equals("1")){
+                is(success =<90);
+                System.out.println("");
+                System.out.println("You have successfully run away from the alien");
+                System.out.println("");
+            }
+            else{
+                System.out.println("");
+                System.out.println("You have not successfully run away from the alien");
+                user.sethealth(user.gethealth()-5);
+                System.out.println("");
+            }
+            if (x.equals("2")){
+                is(success =<60);
+                System.out.println("");
+                System.out.println("You have successfully defended yourself from the alien");
+                System.out.println("");
+            }
+            else{
+                System.out.println("");
+                System.out.println("You have not successfully defended yourself from the alien");
+                user.sethealth(user.gethealth()-10);
+                System.out.println("");
+            }
+            if (x.equals("3")){
+                is(success =<30);
+                System.out.println("");
+                System.out.println("You have successfully attacked the alien");
+                System.out.println("");
+            }
+            else{
+                System.out.println("");
+                System.out.println("You have not successfully attaked the alien");
+                user.sethealth(user.gethealth()-15);
+                System.out.println("");
+            }
+            */
+
         }
     }
 
