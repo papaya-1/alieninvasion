@@ -8,6 +8,12 @@ public class Main{
         static boolean alienEncountered = false;
         static boolean stayedHome = false; 
         static boolean mainChoice = false;
+        static ArrayList<Item> hardwareInventory;
+        static ArrayList<Item> groceryInventory;
+        static ArrayList<Item> pharmacyInventory; 
+        //static Store hardware = new Store("Home-Depot", 0, 0, hardwareInventory);
+        //static Store grocery = new Store("Safeway", 0, 3, groceryInventory);
+        ///static Store pharmacy = new 
         static Base a = new Base(" shack", 4, 4, 50, false); // 5x5 grid
         static Base b = new Base(" apartment", 1, 2, 50, false);
         static Base c = new Base(" house", 2, 0, 50, false);
