@@ -90,7 +90,6 @@ public class Main{
             if (x.equals("1") || x.equals(" 1")){ //user chooses to eat 
                 System.out.println("");
                 System.out.println("Select a consumable item in your inventory");
-                System.out.println("Note: if you are unsure if an item is consumable, check whether it has a health boost. Items without a health boost are not food");
                 System.out.println("");
                 //later create a seperate display inventory for food 
                 displayInventory();
@@ -127,25 +126,65 @@ public class Main{
                         System.out.println("You have consumed " + userInventory.get(4).getName() + ".");
                         userInventory.remove(4);
                     }
+                    //come up with recursrive statement for this as well
                 }
                 morningChoice = true;
             }
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
                 System.out.println("");
                 System.out.println("Currently, you are alive, as you health is at "+user.getHealth()+ " and your defense is at "+user.getDefense());
-                System.out.print(". In your Inventory, you have ");
-                if(userInventory.size()==0){
-                    System.out.print("nothing.");
-                }
-                else{
-                    for(int i=0; i<userInventory.size(); i++){
-                    System.out.println(userInventory.get(i));
-                }
-            }
+                System.out.print(". In your Inventory, you have: ");
                 System.out.println("");
+                displayInventory();
                 morningChoice = true;
             }
             else if (x.equals("3") || x.equals(" 3")){ //user chooses to take medicine 
+                System.out.println("");
+                System.out.println("Select a medical item in your inventory");
+                System.out.println("");
+                //later create a seperate display inventory for medicine 
+                displayInventory();
+                if (userInventory.size() == 0){ //when inventory is empty 
+                    System.out.println("");
+                    System.out.println("You don't have any medicine :(");
+                }
+                else{
+                    String resp = collector.nextLine();
+                    //include inventory max of 5 items whenever option comes up to add item 
+                    if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
+                        //add an if statment here to account for user error in choosing a non-medical item
+                        //add it at the same spot for other items 
+                        user.plusHealth(userInventory.get(0).getHealthBoost());
+                        System.out.println("You have used " + userInventory.get(0).getName() + ".");
+                        System.out.println("Your health is now at: " + user.getHealth());
+                        userInventory.remove(0);
+                    }
+                    else if (resp.equals("2") || resp.equals(" 2")){ //for consuming item 2(index 1)
+                        user.plusHealth(userInventory.get(1).getHealthBoost());
+                        System.out.println("You have used " + userInventory.get(1).getName() + ".");
+                        System.out.println("Your health is now at: " + user.getHealth());
+                        userInventory.remove(1);
+                    }
+                    else if (resp.equals("3") || resp.equals(" 3")){ //for consuming item 3(index 2)
+                        user.plusHealth(userInventory.get(2).getHealthBoost());
+                        System.out.println("You have used " + userInventory.get(2).getName() + ".");
+                        System.out.println("Your health is now at: " + user.getHealth());
+                        userInventory.remove(2);
+                    }
+                    else if (resp.equals("4") || resp.equals(" 4")){ //for consuming item 4(index 3)
+                        user.plusHealth(userInventory.get(3).getHealthBoost());
+                        System.out.println("You have used " + userInventory.get(3).getName() + ".");
+                        System.out.println("Your health is now at: " + user.getHealth());
+                        userInventory.remove(3);
+                    }
+                    else if (resp.equals("5") || resp.equals(" 5")){ //for consuming item 5(index 4)
+                        user.plusHealth(userInventory.get(4).getHealthBoost());
+                        System.out.println("You have used " + userInventory.get(4).getName() + ".");
+                        System.out.println("Your health is now at: " + user.getHealth());
+                        userInventory.remove(4);
+                    }
+                    //come up with recursrive statement for this as well
+                }
                 morningChoice = true; //note to self: place morningChoice in enactDay class and allow for user to choose an option again using recursion since they might not want to just do one of the options 
             }
             else{
@@ -157,6 +196,8 @@ public class Main{
         else if (mainChoice == false){ //main activity
             if (x.equals("1") || x.equals(" 1")){ //user chooses to go to store
                 mainChoice = true;
+                //include choice of what store to go to here 
+                
             }
             else if (x.equals("2") || x.equals(" 2")){ //user choose to make home repairs
                 mainChoice = true;
@@ -180,11 +221,8 @@ public class Main{
             System.out.println("");
             //stayedHome = false; here if you have other options after this
         }
-       /* else if(goToStore == true){ //when going to store equals true
-
-       }
-       */
     }
+       /* else if(goToStore == true){ //when going to store equals true}*/
 
     public static void enactDay(){
         if (dayNum == 1){
@@ -250,8 +288,9 @@ public class Main{
             System.out.println("There are no items in your inventory");
         }
     }
+
     public static void possibleAlienEncounter(){
-        int chance = (int)(Math.random()*101); // 101 is 100 inclusive, right?
+        int chance = (int)(Math.random()*101); // 101 is 100 inclusive, right?, yes 
         if (chance <=50){
             System.out.println("");
             System.out.println("you have made it through without encountering an alien");
@@ -260,52 +299,58 @@ public class Main{
         }
         else{
             System.out.println("");
-            System.out.println("you have had the unfortunate luck of encountering an alien. You have three choices:");
-            System.out.println("1) run away, but end activity, lose all inventory, and potentially lose health (90% success)");
-            System.out.println("2) defend, and potentiallly lose health (60% success)");
-            System.out.println("3) attack, and potentially lose health and all inventory(30% success)");
+            System.out.println("You have had the unfortunate luck of encountering an alien. You have three choices:");
+            System.out.println("1) Run away, but end activity, lose all inventory, and potentially lose health (90% success)");
+            System.out.println("2) Defend, and potentiallly lose health (60% success)");
+            System.out.println("3) Attack, and potentially lose health and all inventory(30% success)");
             System.out.println("");
-            /* resp = collector.nextLine();
-           int success = (int)(Math.random()*101); 101 is 100 inclusive, right?
-            if (x.equals("1")){
-                is(success =<90);
+            String resp = collector.nextLine();
+            int success = (int)(Math.random()*101); //101 is 100 inclusive, right?, yes 
+            if (resp.equals("1")){
+                if(success <= 90){
                 System.out.println("");
                 System.out.println("You have successfully run away from the alien");
                 System.out.println("");
-            }
-            else{
+                }
+                else{
                 System.out.println("");
                 System.out.println("You have not successfully run away from the alien");
-                user.sethealth(user.gethealth()-5);
+                user.setHealth(user.getHealth()-5);
                 System.out.println("");
+                }
             }
-            if (x.equals("2")){
-                is(success =<60);
+            else if (resp.equals("2")){
+                if(success <= 60){
                 System.out.println("");
                 System.out.println("You have successfully defended yourself from the alien");
                 System.out.println("");
-            }
-            else{
+                }
+                else{
                 System.out.println("");
                 System.out.println("You have not successfully defended yourself from the alien");
-                user.sethealth(user.gethealth()-10);
+                user.setHealth(user.getHealth()-10);
                 System.out.println("");
+                }
             }
-            if (x.equals("3")){
-                is(success =<30);
+            if (resp.equals("3")){
+                if(success <= 30){
                 System.out.println("");
                 System.out.println("You have successfully attacked the alien");
                 System.out.println("");
-            }
-            else{
+                }
+                else{
                 System.out.println("");
                 System.out.println("You have not successfully attaked the alien");
-                user.sethealth(user.gethealth()-15);
+                user.setHealth(user.getHealth()-15);
                 System.out.println("");
+                }
             }
-            */
-
         }
+    }
+
+    public static void shopping(){
+        //this is the method for going to the store, seeing the display, and choosing to pick up max 2 items 
+        //if you already have 5 items, you have to drop items to get more 
     }
 
 }
