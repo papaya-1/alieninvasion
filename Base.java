@@ -29,7 +29,7 @@ public class Base extends Place{
     }
 
     public String toString(){
-        return "the" + getName() + " located at coordinates (" + getX() + ","  + getY() + ").";
+        return getName() + " located at coordinates (" + getX() + ","  + getY() + ").";
     }
 
 }
