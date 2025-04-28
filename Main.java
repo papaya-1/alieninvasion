@@ -305,6 +305,7 @@ public class Main{
     public static void enactNight(User user, Base chosen){
         System.out.println("It is now  nighttime and you must sleep to prepare for yout next day. Take the next few moments to rest up. Zzzzzz Zzzzzzzzzzzzz Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
         System.out.println("(please wait a moment for the next morning to start)");
+        System.out.println("");
         try{
         Thread.sleep(5000);
         }
