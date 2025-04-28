@@ -398,4 +398,13 @@ public class Main{
         //if you already have 5 items, you have to drop items to get more 
     }
 
+    public static void repair(){
+        // repairing house 
+        if(chosen.getProtectionLevel() <= 100){
+            if (userInventory.size() != 0){
+
+            
+            }
+        }
+    }
 }
