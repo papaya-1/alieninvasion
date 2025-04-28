@@ -5,8 +5,8 @@ public class Alien extends Entities{
         super();
         attack = 0;
     }
-    public Alien(String type, int defense, int health, boolean isAlive, int attack){
-        super(type, defense, health, isAlive);
+    public Alien(String type, int health, boolean isAlive, int attack){
+        super(type, health, isAlive);
         this.attack = attack;
     }
     public int getAttack(){

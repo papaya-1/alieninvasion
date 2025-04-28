@@ -6,15 +6,9 @@ public class User extends Entities{
     public User(){
         super();
     }
-    public User(String type, int defense, int health, boolean isAlive, ArrayList <Item> inventory){
-        super(type, defense, health, isAlive);
+    public User(String type, int health, boolean isAlive, ArrayList <Item> inventory){
+        super(type, health, isAlive);
         this.inventory = inventory;
-    }
-    public void addDefense(int x){
-        defense += x;
-    }
-    public void minusDefense(int x){
-        defense -= x;
     }
     public void plusHealth(int x){
         health += x;

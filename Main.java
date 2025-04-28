@@ -41,7 +41,7 @@ public class Main{
         //keeps track of what base the user is using 
         static Base chosen; 
         //creates a user 
-        static User user = new User("human", 50, 100, true, userInventory);
+        static User user = new User("human", 100, true, userInventory);
         //takes in user input
         static Scanner collector = new Scanner(System.in);
     public static void main (String[] args){
@@ -177,7 +177,7 @@ public class Main{
             }
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
                 System.out.println("");
-                System.out.println("Currently, you are alive, as your health is at "+user.getHealth()+ " and your defense is at "+user.getDefense());
+                System.out.println("Currently, you are alive, as your health is at "+ user.getHealth());
                 System.out.print(". In your Inventory, you have: ");
                 System.out.println("");
                 displayInventory();
