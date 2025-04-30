@@ -17,6 +17,9 @@ public class Base extends Place{
     public void setProtectionLevel(int x){
         protectionLevel=x;
     }
+    public void addProtection(int x){
+        protectionLevel += x;
+    }
     public boolean getDestroyed(){
         return destroyed;
     }
