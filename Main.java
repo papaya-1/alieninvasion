@@ -10,6 +10,8 @@ public class Main{
         static boolean alienEncountered = false;
         static boolean stayedHome = false; 
         static boolean mainChoice = false;
+        static boolean foodAvailable = false;
+        static boolean medicineAvailable = false;
         //keeps track of store inventroy 
         static ArrayList<Item> hardwareInventory = new ArrayList<Item>();
         static ArrayList<Item> groceryInventory = new ArrayList<Item>();
@@ -20,20 +22,17 @@ public class Main{
         static Store pharmacy = new Store("Walgreens", 4, 2, pharmacyInventory);
         //store stock 
             //home depot items 
-        static Item ductTape = new Item("Duct tape", 0, 10, 0);
-        static Item sandBags = new Item ("Sanbag", 0, 20, 0);
-        static Item woodenPlanks = new Item ("Wooden planks", 0, 15, 0);        
-        static Item waterGun = new Item("Watergun", 0, 0, 10); //Let's pretend home depot has this
-        static Item stick = new Item("Stick", 0, 0, 15);
-        static Item shovel = new Item("Shovel", 0, 0, 20);
+        static Item ductTape = new Item("Duct tape", 0, 10, 3);
+        static Item sandBags = new Item ("Sanbag", 0, 20, 3);
+        static Item woodenPlanks = new Item ("Wooden planks", 0, 15, 3);        
             //walgreens items 
-        static Item coldMedicine = new Item("Cold medicine", 10, 0, 0);
-        static Item bandages = new Item("Bandages", 15, 0, 0);
-        static Item tylenol = new Item("Tylenol", 20, 0, 0);
+        static Item coldMedicine = new Item("Cold medicine", 10, 0, 2);
+        static Item bandages = new Item("Bandages", 15, 0, 2);
+        static Item tylenol = new Item("Tylenol", 20, 0, 2);
             //safeway items 
-        static Item banana = new Item("Banana", 10, 0, 0);
-        static Item bread = new Item("Bread", 20, 0, 0);
-        static Item muffins = new Item("Muffins", 15, 0, 0);
+        static Item banana = new Item("Banana", 10, 0, 1);
+        static Item bread = new Item("Bread", 20, 0, 1);
+        static Item muffins = new Item("Muffins", 15, 0, 1);
         //housing options 
         static Base a = new Base(" shack", 4, 4, 50, false); // 5x5 grid
         static Base b = new Base(" apartment", 1, 2, 50, false);
@@ -49,9 +48,6 @@ public class Main{
         hardwareInventory.add(ductTape);
         hardwareInventory.add(sandBags);
         hardwareInventory.add(woodenPlanks);
-        hardwareInventory.add(waterGun);
-        hardwareInventory.add(stick);
-        hardwareInventory.add(shovel);
         pharmacyInventory.add(coldMedicine);
         pharmacyInventory.add(bandages);
         pharmacyInventory.add(tylenol);
@@ -134,19 +130,13 @@ public class Main{
         else if (morningChoice == false){ //morning activity 
             if (x.equals("1") || x.equals(" 1")){ //user chooses to eat 
                 System.out.println("");
-                System.out.println("Select a consumable item in your inventory");
+                System.out.println("Select a food item in your inventory");
                 System.out.println("");
-                //later create a seperate display inventory for food 
-                displayInventory();
-                if (userInventory.size() == 0){ //when inventory is empty 
-                    System.out.println("");
-                    System.out.println("You will not be able to eat anything today :(");
-                }
-                else{
+                displaySelectInventory(1);
+                if(foodAvailable == true){
                     String resp = collector.nextLine();
                     //include inventory max of 5 items whenever option comes up to add item 
                     if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
-                        //add an if statment here to account for user error in choosing a non-food item. You can do this by saying if userInventory.get(0).getHealthBoost == 0, say that is not a food item, try again 
                         user.plusHealth(userInventory.get(0).getHealthBoost());
                         System.out.println("You have consumed " + userInventory.get(0).getName() + ".");
                         userInventory.remove(0);
@@ -171,8 +161,9 @@ public class Main{
                         System.out.println("You have consumed " + userInventory.get(4).getName() + ".");
                         userInventory.remove(4);
                     }
-                    //come up with recursrive statement for this as well
+                    foodAvailable = false;
                 }
+                    //come up with recursrive statement for this as well
                 morningChoice = true;
             }
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
@@ -187,18 +178,11 @@ public class Main{
                 System.out.println("");
                 System.out.println("Select a medical item in your inventory");
                 System.out.println("");
-                //later create a seperate display inventory for medicine 
-                displayInventory();
-                if (userInventory.size() == 0){ //when inventory is empty 
-                    System.out.println("");
-                    System.out.println("You don't have any medicine :(");
-                }
-                else{
+                displaySelectInventory(2);
+                if (medicineAvailable == true){
                     String resp = collector.nextLine();
                     //include inventory max of 5 items whenever option comes up to add item 
                     if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
-                        //add an if statment here to account for user error in choosing a non-medical item
-                        //add it at the same spot for other items 
                         user.plusHealth(userInventory.get(0).getHealthBoost());
                         System.out.println("You have used " + userInventory.get(0).getName() + ".");
                         System.out.println("Your health is now at: " + user.getHealth());
@@ -228,8 +212,9 @@ public class Main{
                         System.out.println("Your health is now at: " + user.getHealth());
                         userInventory.remove(4);
                     }
+                    medicineAvailable = false;
                     //come up with recursrive statement for this as well
-                }
+                    }
                 morningChoice = true; //note to self: place morningChoice in enactDay class and allow for user to choose an option again using recursion since they might not want to just do one of the options 
             }
             else{
@@ -334,11 +319,46 @@ public class Main{
         }
     }
 
+    public static void displaySelectInventory(int x){
+        int index = 1;
+        int numOf = 0;
+        for(int i = 0; i < userInventory. size(); i++){
+                if(userInventory.get(i).getType() == x){
+                    numOf++;
+                }
+        }
+        if(numOf > 0){
+            if (x == 1){
+                foodAvailable = true;
+            }
+            else if (x == 2){
+                medicineAvailable = true;
+            }
+            for (int i = 0; i < userInventory.size(); i++){
+                if(userInventory.get(i).getType() == x){
+                System.out.println(index + ") " + userInventory.get(i));
+                index++;
+                }
+            }
+        }
+        else{
+            System.out.println("There are no food items in your inventory");
+            if (x == 1){
+                System.out.println("");
+                    System.out.println("You will not be able to eat anything today :(");
+            }
+            else if (x == 2){
+                System.out.println("");
+                    System.out.println("You don't have any medicine :(");
+            }
+        }
+    }
+
     public static void possibleAlienEncounter(){
         int chance = (int)(Math.random()*101); // 101 is 100 inclusive, right?, yes 
         if (chance <=50){
             System.out.println("");
-            System.out.println("you have made it through without encountering an alien");
+            System.out.println("You have made it through without encountering an alien");
             System.out.println("");
 
         }
@@ -394,8 +414,27 @@ public class Main{
     }
 
     public static void shopping(){
+        System.out.println("Which store would you like to visit?");
+        System.out.println("Your options are:");
+        System.out.println("1) Safeway");
+        System.out.println("2) Walgreens");
+        System.out.println("3) Home Depot");
+        String resp = collector.nextLine();
+        if(resp.equals(1)){
+            
+        }
+        else if (resp.equals(2){
+
+        }
+        else if (resp.equals(3)){
+
+        }
         //this is the method for going to the store, seeing the display, and choosing to pick up max 2 items 
         //if you already have 5 items, you have to drop items to get more 
+    }
+
+    public static void calculateDistance(Base x, Store y){
+        
     }
 
 }

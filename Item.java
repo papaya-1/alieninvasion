@@ -3,20 +3,20 @@ public class Item{
     private String name; 
     private int healthBoost;
     private int defenseBoost;
-    private int attackCapability;
+    private int type; //1 represents food, 2 represents medicine, 3 represents homeRepair
 
-    public Item(String name, int healthBoost, int defenseBoost, int attackCapability){
+    public Item(String name, int healthBoost, int defenseBoost, int type){
         this.name = name; 
         this.healthBoost = healthBoost;
         this.defenseBoost = defenseBoost;
-        this.attackCapability = attackCapability; 
+        this.type = type;
     } 
 
-    public Item(String name){
+    public Item(String name, int type){
         this.name = name;
+        this.type = type;
         healthBoost = 0;
         defenseBoost = 0;
-        attackCapability = 0; 
     }
 
     public String toString(){
@@ -35,8 +35,8 @@ public class Item{
         return healthBoost;
     }
 
-    public int getAttackCap(){
-        return attackCapability;
+    public int getType(){
+        return type;
     }
 
 }
