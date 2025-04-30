@@ -414,20 +414,46 @@ public class Main{
     }
 
     public static void shopping(){
+        double x = calculateDistance(chosen, grocery);
+        double y = calculateDistance(chosen, pharmacy);
+        double z = calculateDistance(chosen, hardware);
         System.out.println("Which store would you like to visit?");
         System.out.println("Your options are:");
-        System.out.println("1) Safeway");
-        System.out.println("2) Walgreens");
-        System.out.println("3) Home Depot");
+        System.out.println("1) Safeway with a distance away of " + x);
+        System.out.println("2) Walgreens with a distance away of " + y);
+        System.out.println("3) Home Depot with a distance away of " + z);
+        //System.out.println("The further away the store, the higher chance you will be attacked by an alien on the way there.");
+        //add this in later 
         String resp = collector.nextLine();
-        if(resp.equals("1")){
-            
+        if (resp.equals("1")){
+            System.out.println("You start walking towards Safeway...");
+            try{ 
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e){
+                    e.printStackTrace();
+            }
+            //display inventory, allow user to choose one 
+            //then link this and the alien fight to the go to store method 
+            //then finish fix method + remaining evening methods 
         }
         else if (resp.equals("2")){
-
+            System.out.println("You start walking towards Walgreens...");
+            try{ 
+                Thread.sleep(3000);
+            }
+            catch (InterruptedException e){
+                    e.printStackTrace();
+            }
         }
         else if (resp.equals("3")){
-
+            System.out.println("You start walking towards Home Depot...");
+            try{ 
+                Thread.sleep(3000);
+            }
+            catch (InterruptedException e){
+                    e.printStackTrace();
+            }
         }
         //this is the method for going to the store, seeing the display, and choosing to pick up max 2 items 
         //if you already have 5 items, you have to drop items to get more 
@@ -443,8 +469,9 @@ public class Main{
         }
     }
 
-    public static void calculateDistance(Base x, Store y){
-        
+    public static double calculateDistance(Base x, Store y){
+        double distance = Math.sqrt(Math.pow(2, (y.getX()-x.getX())) + Math.pow(2,(y.getY()- x.getY())));
+        return distance;
     }
 
 }
