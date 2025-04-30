@@ -423,7 +423,7 @@ public class Main{
         if(resp.equals(1)){
             
         }
-        else if (resp.equals(2){
+        else if (resp.equals(2)){
 
         }
         else if (resp.equals(3)){
@@ -442,7 +442,7 @@ public class Main{
             }
         }
     }
-    
+
     public static void calculateDistance(Base x, Store y){
         
     }
