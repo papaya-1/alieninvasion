@@ -425,7 +425,6 @@ public class Main{
                 else if (resp.equals("2")){
                     chosen = c;
                     System.out.println("You have chosen" + c);
-
                 }
             }
             else if (chosen.getName().equals("house")){ //this is c
@@ -434,9 +433,11 @@ public class Main{
                 String resp = collector.nextLine();
                 if(resp.equals("1")){
                     chosen = a;
+                    System.out.println("You have chosen " + a);
                 }
                 else if (resp.equals("2")){
                     chosen = b;
+                    System.out.println("You have chosen" + b);
                 }
             }
         }
