@@ -420,13 +420,13 @@ public class Main{
         System.out.println("2) Walgreens");
         System.out.println("3) Home Depot");
         String resp = collector.nextLine();
-        if(resp.equals(1)){
+        if(resp.equals("1")){
             
         }
-        else if (resp.equals(2)){
+        else if (resp.equals("2")){
 
         }
-        else if (resp.equals(3)){
+        else if (resp.equals("3")){
 
         }
         //this is the method for going to the store, seeing the display, and choosing to pick up max 2 items 
