@@ -603,7 +603,6 @@ public class Main{
     public static void eat(){
         System.out.println("");
         System.out.println("Select a food item in your inventory");
-        System.out.println("");
         tempInventory.clear();
         displaySelectInventory(1);
         if(foodAvailable == true){
@@ -645,7 +644,6 @@ public class Main{
     public static void takeMedicine(){
         System.out.println("");
         System.out.println("Select a medical item in your inventory");
-        System.out.println("");
         tempInventory.clear();
         displaySelectInventory(2);
         if (medicineAvailable == true){
