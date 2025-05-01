@@ -39,8 +39,8 @@ public class Main{
         static Item banana = new Item("Banana", 10, 0, 1);
         static Item bread = new Item("Bread", 20, 0, 1);
         static Item muffins = new Item("Muffins", 15, 0, 1);
-        static Item crackers = new Item("Crackers", 5, 0, 0);
-        static Item pineapple = new Item("Extremely Delicious Pineapple", 25, 0, 0);
+        static Item crackers = new Item("Crackers", 5, 0, 1);
+        static Item pineapple = new Item("Extremely Delicious Pineapple", 25, 0, 1);
         //housing options 
         static Base a = new Base(" shack", 2, 2, 40, false); // 5x5 grid
         static Base b = new Base(" apartment", 1, 3, 60, false);
@@ -92,9 +92,12 @@ public class Main{
                 System.out.println("");
                 pause(2000);
                 displayMap();
+                System.out.println("");
                 System.out.println("1)The" + a); //add more description about base besides toString, ex: distance from stores
                 System.out.println("2)The" + b);
                 System.out.println("3)The" + c);
+                System.out.println("");
+                System.out.println("Pick your base");
                 String resp = collector.nextLine();
                 getResponse(resp); //gets the computer's response for base selection. the other days don't use this method since, enactDay itself calls getResponse
                 enactDay(); //begins the game sim 
@@ -266,11 +269,11 @@ public class Main{
         System.out.println("3. Take medicine");
         resp = collector.nextLine();
         getResponse(resp);
-        pause(1000);
+        pause(2000);
         System.out.println("");
         System.out.println("The last sunlight of the day fades away, as the day draws to a close. You will have another chance to improve to situation and make it until help arrives tomorrow.");
         System.out.println("");
-        pause(3000);
+        pause(4000);
     }
     
     public static void enactNight(User user, Base chosen){
@@ -342,7 +345,7 @@ public class Main{
             //+ dailyExtra for excessFood that was capped off due to 100 limit
             //encourages user to eat 
         }
-        System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health a little. Currently your health is at  "+ user.getHealth());
+        System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health a little. If you haven't eaten, you will notice a drop in your health. Currently your health is at  "+ user.getHealth());
         pause(4000);
 
     }
@@ -424,9 +427,10 @@ public class Main{
                 System.out.println("");
                 }
                 else{
+                user.setHealth(user.getHealth()-5);
                 System.out.println("");
                 System.out.println("You have not successfully run away from the alien");
-                user.setHealth(user.getHealth()-5);
+                System.out.println("Your health is now at " + user.getHealth());
                 System.out.println("");
                 }
             }
@@ -437,9 +441,10 @@ public class Main{
                 System.out.println("");
                 }
                 else{
+                user.setHealth(user.getHealth()-10);
                 System.out.println("");
                 System.out.println("You have not successfully defended yourself from the alien");
-                user.setHealth(user.getHealth()-10);
+                System.out.println("Your health is now at " + user.getHealth());
                 System.out.println("");
                 }
             }
@@ -450,9 +455,10 @@ public class Main{
                 System.out.println("");
                 }
                 else{
+                user.setHealth(user.getHealth()-15);
                 System.out.println("");
                 System.out.println("You have not successfully attaked the alien");
-                user.setHealth(user.getHealth()-15);
+                System.out.println("Your health is now at " + user.getHealth());
                 System.out.println("");
                     if(success <= 30){
                         userInventory.clear();
@@ -632,6 +638,7 @@ public class Main{
         System.out.println("With your item secured, you head back to your base. Be wary- the aliens come out at evening");
         pause(5000);
         possibleAlienEncounter(userDis);
+        pause(2000);
         //this is the method for going to the store, seeing the display, and choosing to pick up max 2 items 
         //if you already have 5 items, you have to drop items to get more 
     }
