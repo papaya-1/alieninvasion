@@ -493,11 +493,11 @@ public class Main{
             }
             else if (resp2.equals("2")){
                 userInventory.add(groceryInventory.get(1));
-                System.out.println("You have added " + groceryInventory.get(1) + "to your inventory");
+                System.out.println("You have added " + groceryInventory.get(1) + " to your inventory");
             }
             else if (resp2.equals("3")){
                 userInventory.add(hardwareInventory.get(2));
-                System.out.println("You have added " + groceryInventory.get(2) + "to your inventory");
+                System.out.println("You have added " + groceryInventory.get(2) + " to your inventory");
             }           
         }
         else if (resp.equals("2")){
@@ -515,11 +515,11 @@ public class Main{
             }
             else if (resp2.equals("2")){
                 userInventory.add(pharmacyInventory.get(1));
-                System.out.println("You have added " + pharmacyInventory.get(1) + "to your inventory");
+                System.out.println("You have added " + pharmacyInventory.get(1) + " to your inventory");
             }
             else if (resp2.equals("3")){
                 userInventory.add(pharmacyInventory.get(2));
-                System.out.println("You have added " + pharmacyInventory.get(2) + "to your inventory");
+                System.out.println("You have added " + pharmacyInventory.get(2) + " to your inventory");
             }
         }
         else if (resp.equals("3")){
@@ -537,11 +537,11 @@ public class Main{
             }
             else if (resp2.equals("2")){
                 userInventory.add(hardwareInventory.get(1));
-                System.out.println("You have added " + hardwareInventory.get(1) + "to your inventory");
+                System.out.println("You have added " + hardwareInventory.get(1) + " to your inventory");
             }
             else if (resp2.equals("3")){
                 userInventory.add(hardwareInventory.get(2));
-                System.out.println("You have added " + hardwareInventory.get(2) + "to your inventory");
+                System.out.println("You have added " + hardwareInventory.get(2) + " to your inventory");
             }
         }
         pause(2000);
