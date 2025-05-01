@@ -13,31 +13,38 @@ public class Main{
         static boolean foodAvailable = false;
         static boolean medicineAvailable = false;
         static boolean repairAvailable = false; 
+        static int dailyExtra = 0;
         //keeps track of store inventory 
         static ArrayList<Item> hardwareInventory = new ArrayList<Item>();
         static ArrayList<Item> groceryInventory = new ArrayList<Item>();
         static ArrayList<Item> pharmacyInventory = new ArrayList<Item>();
         //stores 
-        static Store hardware = new Store("Home-Depot", 0, 0, hardwareInventory);
-        static Store grocery = new Store("Safeway", 2, 2, groceryInventory);
-        static Store pharmacy = new Store("Walgreens", 4, 2, pharmacyInventory);
+        static Store hardware = new Store("Hardware", 0, 2, hardwareInventory);
+        static Store grocery = new Store("Grocery", 1, 1, groceryInventory);
+        static Store pharmacy = new Store("Pharmacy", 3, 1, pharmacyInventory);
         //store stock 
-        //home depot items 
-        static Item ductTape = new Item("Duct tape", 0, 10, 3);
+        //hardware items 
+        static Item ductTape = new Item("Duct Tape", 0, 10, 3);
         static Item sandBags = new Item ("Sandbag", 0, 20, 3);
-        static Item woodenPlanks = new Item ("Wooden planks", 0, 15, 3);        
-        //walgreens items 
-        static Item coldMedicine = new Item("Cold medicine", 10, 0, 2);
-        static Item bandages = new Item("Bandages", 15, 0, 2);
-        static Item tylenol = new Item("Tylenol", 20, 0, 2);
-        //safeway items 
+        static Item woodenPlanks = new Item ("Wooden Planks", 0, 15, 3); 
+        static Item bricks = new Item("Bricks", 0, 5, 3);  
+        static Item hurricaneShutters = new Item("Hurricane Shutters", 0, 25,3);     
+        //pharmacy items 
+        static Item coldMedicine = new Item("Cold Medicine", 10, 0, 2);
+        static Item bandages = new Item("Bandages", 5, 0, 2);
+        static Item antibiotics = new Item("Antibiotics", 25, 0, 2);
+        static Item gauze = new Item("Gauze", 20, 0, 2);
+        static Item splint = new Item("Splint", 15, 0, 2);
+        //grocery items 
         static Item banana = new Item("Banana", 10, 0, 1);
         static Item bread = new Item("Bread", 20, 0, 1);
         static Item muffins = new Item("Muffins", 15, 0, 1);
+        static Item crackers = new Item("Crackers", 5, 0, 0);
+        static Item pineapple = new Item("Extremely Delicious Pineapple", 25, 0, 0);
         //housing options 
-        static Base a = new Base(" shack", 4, 4, 50, false); // 5x5 grid
-        static Base b = new Base(" apartment", 1, 2, 50, false);
-        static Base c = new Base(" house", 2, 0, 50, false);
+        static Base a = new Base(" shack", 2, 2, 40, false); // 5x5 grid
+        static Base b = new Base(" apartment", 1, 3, 60, false);
+        static Base c = new Base(" house", 4, 3, 80, false);
         static Base[] baseList = {a,b,c};
         //keeps track of what base the user is using 
         static Base chosen; 
@@ -50,25 +57,41 @@ public class Main{
         hardwareInventory.add(ductTape);
         hardwareInventory.add(sandBags);
         hardwareInventory.add(woodenPlanks);
+        hardwareInventory.add(bricks);
+        hardwareInventory.add(hurricaneShutters);
         pharmacyInventory.add(coldMedicine);
         pharmacyInventory.add(bandages);
-        pharmacyInventory.add(tylenol);
+        pharmacyInventory.add(antibiotics);
+        pharmacyInventory.add(gauze);
+        pharmacyInventory.add(splint);
         groceryInventory.add(banana);
         groceryInventory.add(muffins);
         groceryInventory.add(bread);
+        groceryInventory.add(crackers);
+        groceryInventory.add(pineapple);
         //introduction 
         System.out.println(""); 
-        System.out.println("You come from summer break to find that your town has been invaded by aliens! \nNo one else is around, but luckily help is arriving in 12 days. \nYou'll need to survive in your 5x5 town by finding a base, maintaining it, geting food, and remain alive all through alien attacks to keep your health up until help arrives.");
+        System.out.println("You come home from summer break to find that your town has been invaded by aliens!");
+        System.out.println("No one else is around, but luckily help is arriving in 12 days.");
+        System.out.println("You'll need to survive by finding a base, maintaining it, geting food and medicine to keep your health up, and surviving alien attacks until help arrives.");
         System.out.println("Note: to select any options in this game, you must choose a number");
         System.out.println("");
         //pause between introduction and start of game  
-        pause(3000);
+        pause(6000);
         while(dayNum <= 12 && user.getIsAlive()){ //loop for 12 days game simulation 
             if(dayNum == 12){ //game sim for day 12 
                 System.out.println("You have been saved! /(^^)/");
             }
             else if(dayNum == 1){ //game sim for 1st day- it is seperate since it has an additional step which is base selection 
-                System.out.println("Let's start with finding a base! Remember to choose wisely. Here are your options:");
+                System.out.println("Let's start with finding a base! Remember to choose wisely as your base plays a major role in your survival.");
+                pause(2000);
+                System.out.println("Things to consider are the quality of your base and proximity to supplies."); 
+                pause(2000);
+                System.out.println("");
+                System.out.println("Located below is the town map (5 x 5 grid) and your list of options for base selection.");
+                System.out.println("");
+                pause(2000);
+                displayMap();
                 System.out.println("1)The" + a); //add more description about base besides toString, ex: distance from stores
                 System.out.println("2)The" + b);
                 System.out.println("3)The" + c);
@@ -78,6 +101,7 @@ public class Main{
                 enactNight(user,chosen); //begins the game sim for nightime 
                 morningChoice = false; //resets the prompt vars that check is a prompt has been called
                 mainChoice = false;
+                dailyExtra = 0;
                 dayNum++; //ends a day and begins a new one 
             } 
             else{ //game sim for days 2 - 11
@@ -85,6 +109,7 @@ public class Main{
                 enactNight(user,chosen);
                 morningChoice = false; //reset all other day choices here so that the computer knows //remember to set true each times these things happen
                 mainChoice = false;
+                dailyExtra = 0;
                 dayNum++;
             }
         }
@@ -106,6 +131,15 @@ public class Main{
         catch (InterruptedException e){
                 e.printStackTrace();
         }
+    }
+
+    public static void displayMap(){
+        //doesn't work with a map that updates, but this map won't update, so it works for our purposes
+        System.out.println("[---------][---------][Hardware-][---------][---------]");
+        System.out.println("[---------][Grocery--][---------][Apartment][---------]");
+        System.out.println("[---------][---------][Shack----][---------][---------]");
+        System.out.println("[---------][Pharmacy-][---------][---------][---------]");
+        System.out.println("[---------][---------][---------][House----][---------]");
     }
 
     public static void getResponse(String x){
@@ -146,7 +180,7 @@ public class Main{
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
                 System.out.println("");
                 System.out.println("Currently, you are alive, as your health is at "+ user.getHealth());
-                System.out.print("In your Inventory, you have: ");
+                System.out.print("In your inventory, you have: ");
                 System.out.println("");
                 displayInventory();
                 morningChoice = true;
@@ -165,7 +199,6 @@ public class Main{
             if (x.equals("1") || x.equals(" 1")){ //user chooses to go to store
                 //include choice of what store to go to here, later factor distance into monster attack danger 
                 shopping();
-                possibleAlienEncounter();
                 mainChoice = true;
             }
             else if (x.equals("2") || x.equals(" 2")){ //user choose to make home repairs
@@ -191,7 +224,7 @@ public class Main{
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
                 System.out.println("");
                 System.out.println("Currently, you are alive, as your health is at "+ user.getHealth());
-                System.out.print("In your Inventory, you have: ");
+                System.out.print("In your inventory, you have: ");
                 System.out.println("");
                 displayInventory();
             }
@@ -290,25 +323,27 @@ public class Main{
                     chosen = baseList[indexes.get(2)];
                     System.out.println("You head towards your new base " + chosen);
                 }
-                possibleAlienEncounter();
+                possibleAlienEncounter(0);
                 System.out.println("You make it to your base and rest up for the rest of the night. You loose 10 health due to lack of sleep");
-                user.setHealth(user.getHealth()-10);
+                user.setHealth(user.getHealth() - 10);
                 if (user.getHealth() <= 0){
                     System.out.println("It looks like that was the last straw. You have died");
                 }
+                pause(2000);
             }
         }
-        if (user.getHealth() == 100){
-            //nothing happens here 
+        if(user.getHealth() - 10 + dailyExtra > 100){
+            user.setHealth(100);
         }
         else{
-            user.setHealth(user.getHealth()-10); 
+            user.setHealth(user.getHealth() - 10 + dailyExtra);
             //+ 5 health for sleeping 
             //- 15 health for food 
+            //+ dailyExtra for excessFood that was capped off due to 100 limit
             //encourages user to eat 
         }
-        pause(2000);
         System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health a little. Currently your health is at  "+ user.getHealth());
+        pause(4000);
 
     }
 
@@ -365,23 +400,23 @@ public class Main{
         }
     }
 
-    public static void possibleAlienEncounter(){
-        int chance = (int)(Math.random()*101); // 101 is 100 inclusive, right?, yes 
+    public static void possibleAlienEncounter(int x){
+        int chance = (int)(Math.random()*101); 
+        chance -= x*3;
         if (chance <=50){
             System.out.println("");
             System.out.println("You have made it through without encountering an alien");
             System.out.println("");
-
         }
         else{
             System.out.println("");
             System.out.println("You have had the unfortunate luck of encountering an alien. You have three choices:");
             System.out.println("1) Run away, but end activity, lose all inventory, and potentially lose health (90% success)");
-            System.out.println("2) Defend, and potentiallly lose health (60% success)");
-            System.out.println("3) Attack, and potentially lose health and all inventory(30% success)");
+            System.out.println("2) Defend, and potentiallly lose health (40% success)");
+            System.out.println("3) Attack, and potentially lose health and all inventory(60% success)");
             String resp = collector.nextLine();
             System.out.println("");
-            int success = (int)(Math.random()*101); //101 is 100 inclusive, right?, yes 
+            int success = (int)(Math.random()*101); 
             if (resp.equals("1")){
                 if(success <= 90){
                 System.out.println("");
@@ -396,7 +431,7 @@ public class Main{
                 }
             }
             else if (resp.equals("2")){
-                if(success <= 60){
+                if(success <= 40){
                 System.out.println("");
                 System.out.println("You have successfully defended yourself from the alien");
                 System.out.println("");
@@ -409,7 +444,7 @@ public class Main{
                 }
             }
             else if (resp.equals("3")){
-                if(success <= 30){
+                if(success <= 60){
                 System.out.println("");
                 System.out.println("You have successfully attacked the alien");
                 System.out.println("");
@@ -419,6 +454,9 @@ public class Main{
                 System.out.println("You have not successfully attaked the alien");
                 user.setHealth(user.getHealth()-15);
                 System.out.println("");
+                    if(success <= 30){
+                        userInventory.clear();
+                    }
                 }
             }
             if (user.getHealth() <= 0){
@@ -428,15 +466,18 @@ public class Main{
         }
     }
 
-    public static double calculateDistance(Base x, Store y){
-        double distance = Math.sqrt(Math.pow(2, (y.getX()-x.getX())) + Math.pow(2,(y.getY()- x.getY())));
+    public static int calculateDistance(Base y, Store x){
+        int yDis = Math.abs(y.getY() - x.getY());
+        int xDis = Math.abs(y.getX() - x.getX());
+        int distance = xDis + yDis;
         return distance;
     }
 
     public static void shopping(){
-        double x = (double)(Math.round(calculateDistance(chosen, grocery)* 100.00))/100;
-        double y = (double)(Math.round(calculateDistance(chosen, pharmacy)*100.00))/100;
-        double z = (double)(Math.round(calculateDistance(chosen, hardware)*100.00))/100;
+        int x = calculateDistance(chosen, grocery);
+        int y = calculateDistance(chosen, pharmacy);
+        int z = calculateDistance(chosen, hardware);
+        int userDis = 0;
         if (userInventory.size() >= 5){ //checks for inventory max
             System.out.println("");
             System.out.println("There are too many items in your inventory to go to the store. You must drop something. Choose something to drop. Here is your inventory for reference: ");
@@ -469,15 +510,15 @@ public class Main{
         System.out.println("");
         System.out.println("Which store would you like to visit?");
         System.out.println("Your options are:");
-        System.out.println("1) Safeway with a distance away of " + x);
-        System.out.println("2) Walgreens with a distance away of " + y);
-        System.out.println("3) Home Depot with a distance away of " + z);
-        //System.out.println("The further away the store, the higher chance you will be attacked by an alien on the way there.");
-        //add this in later 
+        System.out.println("1) The Grocery Store with a distance away of " + x);
+        System.out.println("2) The Pharmacy with a distance away of " + y);
+        System.out.println("3) The Hardware Store with a distance away of " + z);
+        System.out.println("The further away the store, the higher chance you will be attacked by an alien on the way there.");
         String resp = collector.nextLine();
         System.out.println("");
         if (resp.equals("1")){
-            System.out.println("You start walking towards Safeway...");
+            userDis = x;
+            System.out.println("You start walking towards The Grocery Store...");
             pause(2000);
             System.out.println("");
             System.out.println("You arrive at the store and check the last shelf filled with supplies. You see the following items on the shelf:");
@@ -489,19 +530,34 @@ public class Main{
             if (resp2.equals("1")){
                 userInventory.add(groceryInventory.get(0));
                 System.out.println("You have added " + groceryInventory.get(0) + " to your inventory");
+                groceryInventory.remove(0);
             }
             else if (resp2.equals("2")){
                 userInventory.add(groceryInventory.get(1));
                 System.out.println("You have added " + groceryInventory.get(1) + " to your inventory");
+                groceryInventory.remove(1);
             }
             else if (resp2.equals("3")){
-                userInventory.add(hardwareInventory.get(2));
+                userInventory.add(groceryInventory.get(2));
                 System.out.println("You have added " + groceryInventory.get(2) + " to your inventory");
-            }           
+                groceryInventory.remove(2);
+            } 
+            else if (resp2.equals("4")){
+                userInventory.add(groceryInventory.get(3));
+                System.out.println("You have added " + groceryInventory.get(3) + " to your inventory");
+                groceryInventory.remove(3);
+            }
+            else if (resp2.equals("5")){
+                userInventory.add(groceryInventory.get(4));
+                System.out.println("You have added " + groceryInventory.get(4) + " to your inventory");
+                groceryInventory.remove(4);
+            }                
         }
         else if (resp.equals("2")){
-            System.out.println("You start walking towards Walgreens...");
+            userDis = y;
+            System.out.println("You start walking towards The Pharmacy...");
             pause(2000);
+            System.out.println("");
             System.out.println("You arrive at the store and check the last shelf filled with supplies. You see the following items on the shelf:");
             for(int i = 0; i < pharmacyInventory.size(); i++){
                 System.out.println(i+1 + ") " + pharmacyInventory.get(i));
@@ -511,19 +567,34 @@ public class Main{
             if (resp2.equals("1")){
                 userInventory.add(pharmacyInventory.get(0));
                 System.out.println("You have added " + pharmacyInventory.get(0) + " to your inventory");
+                pharmacyInventory.remove(0);
             }
             else if (resp2.equals("2")){
                 userInventory.add(pharmacyInventory.get(1));
                 System.out.println("You have added " + pharmacyInventory.get(1) + " to your inventory");
+                pharmacyInventory.remove(1);
             }
             else if (resp2.equals("3")){
                 userInventory.add(pharmacyInventory.get(2));
                 System.out.println("You have added " + pharmacyInventory.get(2) + " to your inventory");
+                pharmacyInventory.remove(2);
+            }
+            else if (resp2.equals("4")){
+                userInventory.add(pharmacyInventory.get(3));
+                System.out.println("You have added " + pharmacyInventory.get(3) + " to your inventory");
+                pharmacyInventory.remove(3);
+            }
+            else if (resp2.equals("5")){
+                userInventory.add(pharmacyInventory.get(4));
+                System.out.println("You have added " + pharmacyInventory.get(4) + " to your inventory");
+                pharmacyInventory.remove(4);
             }
         }
         else if (resp.equals("3")){
-            System.out.println("You start walking towards Home Depot...");
+            userDis = z;
+            System.out.println("You start walking towards The Hardware Store...");
             pause(2000);
+            System.out.println("");
             System.out.println("You arrive at the store and check the last shelf filled with supplies. You see the following items on the shelf:");
             for(int i = 0; i < hardwareInventory.size(); i++){
                 System.out.println(i+1 + ") " + hardwareInventory.get(i));
@@ -533,20 +604,34 @@ public class Main{
             if (resp2.equals("1")){
                 userInventory.add(hardwareInventory.get(0));
                 System.out.println("You have added " + hardwareInventory.get(0) + " to your inventory");
+                hardwareInventory.remove(0);
             }
             else if (resp2.equals("2")){
                 userInventory.add(hardwareInventory.get(1));
                 System.out.println("You have added " + hardwareInventory.get(1) + " to your inventory");
+                hardwareInventory.remove(1);
             }
             else if (resp2.equals("3")){
                 userInventory.add(hardwareInventory.get(2));
                 System.out.println("You have added " + hardwareInventory.get(2) + " to your inventory");
+                hardwareInventory.remove(2);
+            }
+            else if (resp2.equals("4")){
+                userInventory.add(hardwareInventory.get(3));
+                System.out.println("You have added " + hardwareInventory.get(3) + " to your inventory");
+                hardwareInventory.remove(3);
+            }
+            else if (resp2.equals("5")){
+                userInventory.add(hardwareInventory.get(4));
+                System.out.println("You have added " + hardwareInventory.get(4) + " to your inventory");
+                hardwareInventory.remove(4);
             }
         }
         pause(2000);
         System.out.println("");
         System.out.println("With your item secured, you head back to your base. Be wary- the aliens come out at evening");
         pause(5000);
+        possibleAlienEncounter(userDis);
         //this is the method for going to the store, seeing the display, and choosing to pick up max 2 items 
         //if you already have 5 items, you have to drop items to get more 
     }
@@ -555,9 +640,10 @@ public class Main{
         // repairing house 
         if(chosen.getProtectionLevel() <= 100){
             if (userInventory.size() != 0){
-                tempInventory.clear();
-                displaySelectInventory(3);
                 if (repairAvailable == true){
+                    tempInventory.clear();
+                    System.out.println("Choose a tool to repair your base: ");
+                    displaySelectInventory(3);
                     String resp = collector.nextLine();
                     if (resp.equals("1")){
                         if((chosen.getProtectionLevel()+ tempInventory.get(0).getDefBoost()) > 100){
@@ -634,6 +720,7 @@ public class Main{
             //include inventory max of 5 items whenever option comes up to add item 
             if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
                 if((user.getHealth()+tempInventory.get(0).getHealthBoost()) > 100){
+                    dailyExtra += (user.getHealth()+tempInventory.get(0).getHealthBoost()) - 100;
                     user.setHealth(100);
                 }
                 else{
@@ -644,6 +731,7 @@ public class Main{
             }
             else if (resp.equals("2") || resp.equals(" 2")){ //for consuming item 2(index 1)
                 if((user.getHealth()+tempInventory.get(1).getHealthBoost()) > 100){
+                    dailyExtra += (user.getHealth()+tempInventory.get(1).getHealthBoost()) - 100;
                     user.setHealth(100);
                 }
                 else{
@@ -654,6 +742,7 @@ public class Main{
             }
             else if (resp.equals("3") || resp.equals(" 3")){ //for consuming item 3(index 2)
                 if((user.getHealth()+tempInventory.get(2).getHealthBoost()) > 100){
+                    dailyExtra += (user.getHealth()+tempInventory.get(2).getHealthBoost()) - 100;
                     user.setHealth(100);
                 }
                 else{
@@ -664,6 +753,7 @@ public class Main{
             }
             else if (resp.equals("4") || resp.equals(" 4")){ //for consuming item 4(index 3)
                 if((user.getHealth()+tempInventory.get(3).getHealthBoost()) > 100){
+                    dailyExtra += (user.getHealth()+tempInventory.get(3).getHealthBoost()) - 100;
                     user.setHealth(100);
                 }
                 else{
@@ -674,6 +764,7 @@ public class Main{
             }
             else if (resp.equals("5") || resp.equals(" 5")){ //for consuming item 5(index 4)
                 if((user.getHealth()+tempInventory.get(4).getHealthBoost()) > 100){
+                    dailyExtra += (user.getHealth()+tempInventory.get(4).getHealthBoost()) - 100;
                     user.setHealth(100);
                 }
                 else{
