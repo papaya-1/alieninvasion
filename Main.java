@@ -4,15 +4,16 @@ public class Main{
         static int dayNum = 1; 
         //keeps track of user's stufff
         static ArrayList<Item> userInventory = new ArrayList<Item>();
-        //since the user always types in 1, 2, 3..., we need to know what prompt they are answering. This keeps track of what prompt has and hasn't been answered 
+        //displays users specific items, ex: food
         static ArrayList<Item> tempInventory = new ArrayList<Item>();
+        //since the user always types in 1, 2, 3..., we need to know what prompt they are answering. This keeps track of what prompt has and hasn't been answered 
         static boolean baseSelected = false; 
         static boolean morningChoice = false;
         static boolean mainChoice = false;
         static boolean foodAvailable = false;
         static boolean medicineAvailable = false;
         static boolean repairAvailable = false; 
-        //keeps track of store inventroy 
+        //keeps track of store inventory 
         static ArrayList<Item> hardwareInventory = new ArrayList<Item>();
         static ArrayList<Item> groceryInventory = new ArrayList<Item>();
         static ArrayList<Item> pharmacyInventory = new ArrayList<Item>();
@@ -21,15 +22,15 @@ public class Main{
         static Store grocery = new Store("Safeway", 2, 2, groceryInventory);
         static Store pharmacy = new Store("Walgreens", 4, 2, pharmacyInventory);
         //store stock 
-            //home depot items 
+        //home depot items 
         static Item ductTape = new Item("Duct tape", 0, 10, 3);
-        static Item sandBags = new Item ("Sanbag", 0, 20, 3);
+        static Item sandBags = new Item ("Sandbag", 0, 20, 3);
         static Item woodenPlanks = new Item ("Wooden planks", 0, 15, 3);        
-            //walgreens items 
+        //walgreens items 
         static Item coldMedicine = new Item("Cold medicine", 10, 0, 2);
         static Item bandages = new Item("Bandages", 15, 0, 2);
         static Item tylenol = new Item("Tylenol", 20, 0, 2);
-            //safeway items 
+        //safeway items 
         static Item banana = new Item("Banana", 10, 0, 1);
         static Item bread = new Item("Bread", 20, 0, 1);
         static Item muffins = new Item("Muffins", 15, 0, 1);
@@ -61,12 +62,7 @@ public class Main{
         System.out.println("Note: to select any options in this game, you must choose a number");
         System.out.println("");
         //pause between introduction and start of game  
-        try{ 
-            Thread.sleep(3000);
-        }
-        catch (InterruptedException e){
-                e.printStackTrace();
-        }
+        pause(3000);
         while(dayNum <= 12 && user.getIsAlive()){ //loop for 12 days game simulation 
             if(dayNum == 12){ //game sim for day 12 
                 System.out.println("You have been saved! /(^^)/");
@@ -241,6 +237,7 @@ public class Main{
         System.out.println("");
         System.out.println("The last sunlight of the day fades away, as the day draws to a close. You will have another chance to improve to situation and make it until help arrives tomorrow.");
         System.out.println("");
+        pause(3000);
     }
     
     public static void enactNight(User user, Base chosen){
@@ -295,7 +292,6 @@ public class Main{
                 }
                 possibleAlienEncounter();
                 System.out.println("You make it to your base and rest up for the rest of the night. You loose 10 health due to lack of sleep");
-
                 user.setHealth(user.getHealth()-10);
                 if (user.getHealth() <= 0){
                     System.out.println("It looks like that was the last straw. You have died");
@@ -306,10 +302,13 @@ public class Main{
             //nothing happens here 
         }
         else{
-            user.setHealth(user.getHealth()+5); 
+            user.setHealth(user.getHealth()-10); 
+            //+ 5 health for sleeping 
+            //- 15 health for food 
+            //encourages user to eat 
         }
         pause(2000);
-        System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health to "+ user.getHealth());
+        System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health a little. Currently your health is at  "+ user.getHealth());
 
     }
 
@@ -380,8 +379,8 @@ public class Main{
             System.out.println("1) Run away, but end activity, lose all inventory, and potentially lose health (90% success)");
             System.out.println("2) Defend, and potentiallly lose health (60% success)");
             System.out.println("3) Attack, and potentially lose health and all inventory(30% success)");
-            System.out.println("");
             String resp = collector.nextLine();
+            System.out.println("");
             int success = (int)(Math.random()*101); //101 is 100 inclusive, right?, yes 
             if (resp.equals("1")){
                 if(success <= 90){
@@ -546,15 +545,15 @@ public class Main{
         }
         pause(2000);
         System.out.println("");
-        System.out.println("With your items secured, you head back to your base. Be wary- the aliens come out at evening");
-        pause(3000);
+        System.out.println("With your item secured, you head back to your base. Be wary- the aliens come out at evening");
+        pause(5000);
         //this is the method for going to the store, seeing the display, and choosing to pick up max 2 items 
         //if you already have 5 items, you have to drop items to get more 
     }
 
     public static void repair(){
         // repairing house 
-        if(chosen.getProtectionLevel() >= 100){
+        if(chosen.getProtectionLevel() <= 100){
             if (userInventory.size() != 0){
                 tempInventory.clear();
                 displaySelectInventory(3);
