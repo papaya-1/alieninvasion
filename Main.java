@@ -514,15 +514,18 @@ public class Main{
         else{
             if (x == 1){
                 System.out.println("");
-                    System.out.println("You will not be able to eat anything today :(");
+                System.out.println("There are no food items in your inventory");
+                System.out.println("You will not be able to eat anything today :(");
             }
             else if (x == 2){
                 System.out.println("");
-                    System.out.println("You don't have any medicine :(");
+                System.out.println("There are no medical items in your iventory");
+                System.out.println(":(");
             }
             else if (x == 3){
                 System.out.println("");
-                System.out.println("You don't have any home repair tools :(");
+                System.out.println("There are no home repair items in your iventory");
+                System.out.println("You won't be able to fix your house :(");
             }
         }
     }
