@@ -37,6 +37,7 @@ public class Main{
         static Base a = new Base(" shack", 4, 4, 50, false); // 5x5 grid
         static Base b = new Base(" apartment", 1, 2, 50, false);
         static Base c = new Base(" house", 2, 0, 50, false);
+        static Base[] baseList = {a,b,c};
         //keeps track of what base the user is using 
         static Base chosen; 
         //creates a user 
@@ -396,48 +397,61 @@ public class Main{
             e.printStackTrace();
         }
         chosen.setProtectionLevel(chosen.getProtectionLevel()-10);
+        //if a base falls
         if (chosen.getProtectionLevel() <= 0){
             chosen.setDestroyed(true);
+            if (chosen.getName().equals("shack")){
+                a.setDestroyed(true);
+            }
+            else if (chosen.getName().equals("apartment")){
+                b.setDestroyed(true);
+            }
+            else if (chosen.getName().equals("house")){
+                c.setDestroyed(true);
+            }
             System.out.println("You wake up to your shelter crumbling around you. Your base has been destroyed by alien attacks");
             System.out.println("You must travel to a new base and might be attacked by aliens. Here are your options for a base:");
-            if (chosen.getName().equals("shack")){ //this is a
-                System.out.println("1) " + b);
-                System.out.println("2) " + c);
-                String resp = collector.nextLine();
-                if(resp.equals("1")){
-                    chosen = b;
-                    System.out.println("You have chosen " + b);
-                }
-                else if (resp.equals("2")){
-                    chosen = c;
-                    System.out.println("You have chosen " + c);
+            int index = 1;
+            boolean atLeastOne = false;
+            ArrayList<Integer> indexes = new ArrayList<Integer>();
+            for(int i = 0; i < baseList.length; i++){
+                if (baseList[i].getDestroyed() == false){
+                    System.out.println(index + ") " + baseList[i]);
+                    indexes.add(i);
+                    atLeastOne = true;
                 }
             }
-            else if (chosen.getName().equals("apartment")){ //this is b 
-                System.out.println("1) " + a.toString());
-                System.out.println("2) " + c.toString());
+            if(atLeastOne == false){
+                System.out.println("With no available bases, you are exposed to alien attacks...");
+                try{
+                    Thread.sleep(3000);
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                System.out.println("You have died!");
+            }
+            else{
                 String resp = collector.nextLine();
                 if(resp.equals("1")){
-                    chosen = a;
-                    System.out.println("You have chosen" + a);
+                    chosen = baseList[indexes.get(0)];
+                    System.out.println("You head towards your new base " + chosen);
+                    System.out.println("As you head there, you are wary of the chance that you could be attacked by aliens");
+                }
+                else if (resp.equals("2")){
+                    chosen = baseList[indexes.get(1)];
+                    System.out.println("You head towards your new base " + chosen);
+                }
+                else if (resp.equals("3")){
+                    chosen = baseList[indexes.get(2)];
+                    System.out.println("You head towards your new base " + chosen);
+                }
+                possibleAlienEncounter();
+                System.out.println("You make it to your base and rest up for the rest of the night. You loose 10 health due to lack of sleep");
 
-                }
-                else if (resp.equals("2")){
-                    chosen = c;
-                    System.out.println("You have chosen" + c);
-                }
-            }
-            else if (chosen.getName().equals("house")){ //this is c
-                System.out.println("1) " + a.toString());
-                System.out.println("2) " + b.toString());
-                String resp = collector.nextLine();
-                if(resp.equals("1")){
-                    chosen = a;
-                    System.out.println("You have chosen " + a);
-                }
-                else if (resp.equals("2")){
-                    chosen = b;
-                    System.out.println("You have chosen" + b);
+                user.setHealth(user.getHealth()-10);
+                if (user.getHealth() <= 0){
+                    System.out.println("It looks like that was the last straw. You have died");
                 }
             }
         }
@@ -445,7 +459,16 @@ public class Main{
             //nothing happens here 
         }
         else{
-        user.setHealth(user.getHealth()+10);
+            user.setHealth(user.getHealth()-5); //They would loose health if they don't eat to keep it up right?
+            if(user.getHealth() <= 0){
+                System.out.println("Looks like you weren't watching your health! You have died due to lack of food!");
+            }
+        }
+        try{ 
+            Thread.sleep(2000);
+        }
+        catch (InterruptedException e){
+                e.printStackTrace();
         }
         System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health to "+ user.getHealth());
 
@@ -548,7 +571,7 @@ public class Main{
                 System.out.println("");
                 }
             }
-            if (resp.equals("3")){
+            else if (resp.equals("3")){
                 if(success <= 30){
                 System.out.println("");
                 System.out.println("You have successfully attacked the alien");
@@ -560,6 +583,10 @@ public class Main{
                 user.setHealth(user.getHealth()-15);
                 System.out.println("");
                 }
+            }
+            if (user.getHealth() <= 0){
+                System.out.println("You have died");
+                user.setIsAlive(false);
             }
         }
     }
