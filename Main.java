@@ -597,9 +597,10 @@ public class Main{
     }
 
     public static void shopping(){
-        double x = calculateDistance(chosen, grocery);
-        double y = calculateDistance(chosen, pharmacy);
-        double z = calculateDistance(chosen, hardware);
+        double x = (double)(Math.round(calculateDistance(chosen, grocery)* 100.00))/100;
+        double y = (double)(Math.round(calculateDistance(chosen, pharmacy)*100.00))/100;
+        double z = (double)(Math.round(calculateDistance(chosen, hardware)*100.00))/100;
+        System.out.println("");
         System.out.println("Which store would you like to visit?");
         System.out.println("Your options are:");
         System.out.println("1) Safeway with a distance away of " + x);
