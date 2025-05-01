@@ -176,7 +176,7 @@ public class Main{
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
                 System.out.println("");
                 System.out.println("Currently, you are alive, as your health is at "+ user.getHealth());
-                System.out.print(". In your Inventory, you have: ");
+                System.out.print("In your Inventory, you have: ");
                 System.out.println("");
                 displayInventory();
                 morningChoice = true;
@@ -296,7 +296,7 @@ public class Main{
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
                 System.out.println("");
                 System.out.println("Currently, you are alive, as your health is at "+ user.getHealth());
-                System.out.print(". In your Inventory, you have: ");
+                System.out.print("In your Inventory, you have: ");
                 System.out.println("");
                 displayInventory();
             }
@@ -383,7 +383,15 @@ public class Main{
         System.out.println("3. Take medicine");
         resp = collector.nextLine();
         getResponse(resp);
+        try{
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        System.out.println("");
         System.out.println("The last sunlight of the day fades away, as the day draws to a close. You will have another chance to improve to situation and make it until help arrives tomorrow.");
+        System.out.println("");
     }
     
     public static void enactNight(User user, Base chosen){
@@ -391,7 +399,7 @@ public class Main{
         System.out.println("(please wait a moment for the next morning to start)");
         System.out.println("");
         try{
-        Thread.sleep(5000);
+            Thread.sleep(5000);
         }
         catch (InterruptedException e){
             e.printStackTrace();
@@ -459,10 +467,7 @@ public class Main{
             //nothing happens here 
         }
         else{
-            user.setHealth(user.getHealth()-5); //They would loose health if they don't eat to keep it up right?
-            if(user.getHealth() <= 0){
-                System.out.println("Looks like you weren't watching your health! You have died due to lack of food!");
-            }
+            user.setHealth(user.getHealth()+5); 
         }
         try{ 
             Thread.sleep(2000);
@@ -608,14 +613,16 @@ public class Main{
         //System.out.println("The further away the store, the higher chance you will be attacked by an alien on the way there.");
         //add this in later 
         String resp = collector.nextLine();
+        System.out.println("");
         if (resp.equals("1")){
             System.out.println("You start walking towards Safeway...");
             try{ 
-                Thread.sleep(2000);
+                Thread.sleep(3000);
             }
             catch (InterruptedException e){
                     e.printStackTrace();
             }
+            System.out.println("");
             System.out.println("You arrive at the store and check the last shelf filled with supplies. You see the following items on the shelf:");
             for(int i = 0; i < groceryInventory.size(); i++){
                 System.out.println(i+1 + ") " + groceryInventory.get(i));
@@ -633,13 +640,7 @@ public class Main{
             else if (resp2.equals("3")){
                 userInventory.add(hardwareInventory.get(2));
                 System.out.println("You have added " + groceryInventory.get(2) + "to your inventory");
-            }
-            try{ 
-                Thread.sleep(1000);
-            }
-            catch (InterruptedException e){
-                    e.printStackTrace();
-            }            
+            }           
         }
         else if (resp.equals("2")){
             System.out.println("You start walking towards Walgreens...");
@@ -666,12 +667,6 @@ public class Main{
             else if (resp2.equals("3")){
                 userInventory.add(pharmacyInventory.get(2));
                 System.out.println("You have added " + pharmacyInventory.get(2) + "to your inventory");
-            }
-            try{ 
-                Thread.sleep(1000);
-            }
-            catch (InterruptedException e){
-                    e.printStackTrace();
             }
         }
         else if (resp.equals("3")){
@@ -700,13 +695,14 @@ public class Main{
                 userInventory.add(hardwareInventory.get(2));
                 System.out.println("You have added " + hardwareInventory.get(2) + "to your inventory");
             }
-            try{ 
-                Thread.sleep(1000);
-            }
-            catch (InterruptedException e){
-                    e.printStackTrace();
-            }
         }
+        try{ 
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e){
+                e.printStackTrace();
+        }
+        System.out.println("");
         System.out.println("With your items secured, you head back to your base. Be wary- the aliens come out at evening");
         try{ 
             Thread.sleep(1000);

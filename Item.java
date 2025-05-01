@@ -20,7 +20,7 @@ public class Item{
     }
 
     public String toString(){
-        return name + " with a defense boost of " + defenseBoost + "and a health boost of " +  healthBoost; 
+        return name + " with a defense boost of " + defenseBoost + " and a health boost of " +  healthBoost; 
     }
 
     public int getDefBoost(){
