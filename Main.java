@@ -103,6 +103,15 @@ public class Main{
         }
     }
 
+    public static void pause(int x){
+        try{ 
+            Thread.sleep(x);
+        }
+        catch (InterruptedException e){
+                e.printStackTrace();
+        }
+    }
+
     public static void getResponse(String x){
         //getResponse provides the computers responses for the day sim + base selection 
         if (baseSelected == false){ // when user has selected base
@@ -135,42 +144,7 @@ public class Main{
         }
         else if (morningChoice == false){ //morning activity 
             if (x.equals("1") || x.equals(" 1")){ //user chooses to eat 
-                System.out.println("");
-                System.out.println("Select a food item in your inventory");
-                System.out.println("");
-                tempInventory.clear();
-                displaySelectInventory(1);
-                if(foodAvailable == true){
-                    String resp = collector.nextLine();
-                    //include inventory max of 5 items whenever option comes up to add item 
-                    if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
-                        user.plusHealth(tempInventory.get(0).getHealthBoost());
-                        System.out.println("You have consumed " + tempInventory.get(0).getName() + ".");
-                        findAndRemove(0);
-                    }
-                    else if (resp.equals("2") || resp.equals(" 2")){ //for consuming item 2(index 1)
-                        user.plusHealth(tempInventory.get(1).getHealthBoost());
-                        System.out.println("You have consumed " + tempInventory.get(1).getName() + ".");
-                        findAndRemove(1);
-                    }
-                    else if (resp.equals("3") || resp.equals(" 3")){ //for consuming item 3(index 2)
-                        user.plusHealth(tempInventory.get(2).getHealthBoost());
-                        System.out.println("You have consumed " + tempInventory.get(2).getName() + ".");
-                        findAndRemove(2);
-                    }
-                    else if (resp.equals("4") || resp.equals(" 4")){ //for consuming item 4(index 3)
-                        user.plusHealth(tempInventory.get(3).getHealthBoost());
-                        System.out.println("You have consumed " + tempInventory.get(3).getName() + ".");
-                        findAndRemove(3);
-                    }
-                    else if (resp.equals("5") || resp.equals(" 5")){ //for consuming item 5(index 4)
-                        user.plusHealth(tempInventory.get(4).getHealthBoost());
-                        System.out.println("You have consumed " + tempInventory.get(4).getName() + ".");
-                        findAndRemove(4);
-                    }
-                    foodAvailable = false;
-                }
-                    //come up with recursrive statement for this as well
+                eat();
                 morningChoice = true;
             }
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
@@ -182,47 +156,7 @@ public class Main{
                 morningChoice = true;
             }
             else if (x.equals("3") || x.equals(" 3")){ //user chooses to take medicine 
-                System.out.println("");
-                System.out.println("Select a medical item in your inventory");
-                System.out.println("");
-                tempInventory.clear();
-                displaySelectInventory(2);
-                if (medicineAvailable == true){
-                    String resp = collector.nextLine();
-                    //include inventory max of 5 items whenever option comes up to add item 
-                    if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
-                        user.plusHealth(tempInventory.get(0).getHealthBoost());
-                        System.out.println("You have used " + tempInventory.get(0).getName() + ".");
-                        System.out.println("Your health is now at: " + user.getHealth());
-                        findAndRemove(0);
-                    }
-                    else if (resp.equals("2") || resp.equals(" 2")){ //for consuming item 2(index 1)
-                        user.plusHealth(tempInventory.get(1).getHealthBoost());
-                        System.out.println("You have used " + tempInventory.get(1).getName() + ".");
-                        System.out.println("Your health is now at: " + user.getHealth());
-                        findAndRemove(1);
-                    }
-                    else if (resp.equals("3") || resp.equals(" 3")){ //for consuming item 3(index 2)
-                        user.plusHealth(tempInventory.get(2).getHealthBoost());
-                        System.out.println("You have used " + userInventory.get(2).getName() + ".");
-                        System.out.println("Your health is now at: " + user.getHealth());
-                        findAndRemove(2);
-                    }
-                    else if (resp.equals("4") || resp.equals(" 4")){ //for consuming item 4(index 3)
-                        user.plusHealth(tempInventory.get(3).getHealthBoost());
-                        System.out.println("You have used " + tempInventory.get(3).getName() + ".");
-                        System.out.println("Your health is now at: " + user.getHealth());
-                        findAndRemove(3);
-                    }
-                    else if (resp.equals("5") || resp.equals(" 5")){ //for consuming item 5(index 4)
-                        user.plusHealth(tempInventory.get(4).getHealthBoost());
-                        System.out.println("You have used " + tempInventory.get(4).getName() + ".");
-                        System.out.println("Your health is now at: " + user.getHealth());
-                        findAndRemove(4);
-                    }
-                    medicineAvailable = false;
-                    //come up with recursrive statement for this as well
-                    }
+                takeMedicine();
                 morningChoice = true; //note to self: place morningChoice in enactDay class and allow for user to choose an option again using recursion since they might not want to just do one of the options 
             }
             else{
@@ -256,42 +190,7 @@ public class Main{
         }
         else{ //evening activtiy 
             if (x.equals("1") || x.equals(" 1")){ //user chooses to eat 
-                System.out.println("");
-                System.out.println("Select a food item in your inventory");
-                System.out.println("");
-                tempInventory.clear();
-                displaySelectInventory(1);
-                if(foodAvailable == true){
-                    String resp = collector.nextLine();
-                    //include inventory max of 5 items whenever option comes up to add item 
-                    if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
-                        user.plusHealth(tempInventory.get(0).getHealthBoost());
-                        System.out.println("You have consumed " + tempInventory.get(0).getName() + ".");
-                        findAndRemove(0);
-                    }
-                    else if (resp.equals("2") || resp.equals(" 2")){ //for consuming item 2(index 1)
-                        user.plusHealth(tempInventory.get(1).getHealthBoost());
-                        System.out.println("You have consumed " + tempInventory.get(1).getName() + ".");
-                        findAndRemove(1);
-                    }
-                    else if (resp.equals("3") || resp.equals(" 3")){ //for consuming item 3(index 2)
-                        user.plusHealth(tempInventory.get(2).getHealthBoost());
-                        System.out.println("You have consumed " + tempInventory.get(2).getName() + ".");
-                        findAndRemove(2);
-                    }
-                    else if (resp.equals("4") || resp.equals(" 4")){ //for consuming item 4(index 3)
-                        user.plusHealth(tempInventory.get(3).getHealthBoost());
-                        System.out.println("You have consumed " + tempInventory.get(3).getName() + ".");
-                        findAndRemove(3);
-                    }
-                    else if (resp.equals("5") || resp.equals(" 5")){ //for consuming item 5(index 4)
-                        user.plusHealth(tempInventory.get(4).getHealthBoost());
-                        System.out.println("You have consumed " + tempInventory.get(4).getName() + ".");
-                        findAndRemove(4);
-                    }
-                    foodAvailable = false;
-                }
-                    //come up with recursrive statement for this as well
+                eat();
             }
             else if (x.equals("2") || x.equals(" 2")){ //user chooses to check stats/inventory 
                 System.out.println("");
@@ -301,47 +200,7 @@ public class Main{
                 displayInventory();
             }
             else if (x.equals("3") || x.equals(" 3")){ //user chooses to take medicine 
-                System.out.println("");
-                System.out.println("Select a medical item in your inventory");
-                System.out.println("");
-                tempInventory.clear();
-                displaySelectInventory(2);
-                if (medicineAvailable == true){
-                    String resp = collector.nextLine();
-                    //include inventory max of 5 items whenever option comes up to add item 
-                    if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
-                        user.plusHealth(tempInventory.get(0).getHealthBoost());
-                        System.out.println("You have used " + tempInventory.get(0).getName() + ".");
-                        System.out.println("Your health is now at: " + user.getHealth());
-                        findAndRemove(0);
-                    }
-                    else if (resp.equals("2") || resp.equals(" 2")){ //for consuming item 2(index 1)
-                        user.plusHealth(tempInventory.get(1).getHealthBoost());
-                        System.out.println("You have used " + tempInventory.get(1).getName() + ".");
-                        System.out.println("Your health is now at: " + user.getHealth());
-                        findAndRemove(1);
-                    }
-                    else if (resp.equals("3") || resp.equals(" 3")){ //for consuming item 3(index 2)
-                        user.plusHealth(tempInventory.get(2).getHealthBoost());
-                        System.out.println("You have used " + userInventory.get(2).getName() + ".");
-                        System.out.println("Your health is now at: " + user.getHealth());
-                        findAndRemove(2);
-                    }
-                    else if (resp.equals("4") || resp.equals(" 4")){ //for consuming item 4(index 3)
-                        user.plusHealth(tempInventory.get(3).getHealthBoost());
-                        System.out.println("You have used " + tempInventory.get(3).getName() + ".");
-                        System.out.println("Your health is now at: " + user.getHealth());
-                        findAndRemove(3);
-                    }
-                    else if (resp.equals("5") || resp.equals(" 5")){ //for consuming item 5(index 4)
-                        user.plusHealth(tempInventory.get(4).getHealthBoost());
-                        System.out.println("You have used " + tempInventory.get(4).getName() + ".");
-                        System.out.println("Your health is now at: " + user.getHealth());
-                        findAndRemove(4);
-                    }
-                    medicineAvailable = false;
-                    //come up with recursrive statement for this as well
-                    }
+                takeMedicine();
             }
             else{
                 System.out.println("That is not a valid selection. Please try again and make sure to enter a number");
@@ -354,12 +213,7 @@ public class Main{
 
     public static void enactDay(){
         if (dayNum == 1){
-            try{ //pause between base selection and start of day  
-                Thread.sleep(2000);
-            }
-            catch (InterruptedException e){
-                e.printStackTrace();
-            }
+            pause(2000); //pause between base selection and start of day
         }
         System.out.println("");
         System.out.println("Day " + dayNum + " has begun!");
@@ -383,12 +237,7 @@ public class Main{
         System.out.println("3. Take medicine");
         resp = collector.nextLine();
         getResponse(resp);
-        try{
-            Thread.sleep(1000);
-        }
-        catch (InterruptedException e){
-            e.printStackTrace();
-        }
+        pause(1000);
         System.out.println("");
         System.out.println("The last sunlight of the day fades away, as the day draws to a close. You will have another chance to improve to situation and make it until help arrives tomorrow.");
         System.out.println("");
@@ -398,12 +247,7 @@ public class Main{
         System.out.println("It is now  nighttime and you must sleep to prepare for yout next day. Take the next few moments to rest up. Zzzzzz Zzzzzzzzzzzzz Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
         System.out.println("(please wait a moment for the next morning to start)");
         System.out.println("");
-        try{
-            Thread.sleep(5000);
-        }
-        catch (InterruptedException e){
-            e.printStackTrace();
-        }
+        pause(5000);
         chosen.setProtectionLevel(chosen.getProtectionLevel()-10);
         //if a base falls
         if (chosen.getProtectionLevel() <= 0){
@@ -431,12 +275,7 @@ public class Main{
             }
             if(atLeastOne == false){
                 System.out.println("With no available bases, you are exposed to alien attacks...");
-                try{
-                    Thread.sleep(3000);
-                }
-                catch (InterruptedException e){
-                    e.printStackTrace();
-                }
+                pause(2000);
                 System.out.println("You have died!");
             }
             else{
@@ -469,12 +308,7 @@ public class Main{
         else{
             user.setHealth(user.getHealth()+5); 
         }
-        try{ 
-            Thread.sleep(2000);
-        }
-        catch (InterruptedException e){
-                e.printStackTrace();
-        }
+        pause(2000);
         System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health to "+ user.getHealth());
 
     }
@@ -604,6 +438,35 @@ public class Main{
         double x = (double)(Math.round(calculateDistance(chosen, grocery)* 100.00))/100;
         double y = (double)(Math.round(calculateDistance(chosen, pharmacy)*100.00))/100;
         double z = (double)(Math.round(calculateDistance(chosen, hardware)*100.00))/100;
+        if (userInventory.size() >= 5){ //checks for inventory max
+            System.out.println("");
+            System.out.println("There are too many items in your inventory to go to the store. You must drop something. Choose something to drop. Here is your inventory for reference: ");
+            displayInventory();
+            String resp = collector.nextLine();
+            System.out.println("");
+            if(resp.equals("1")){
+                System.out.println("You have dropped " + userInventory.get(0));
+                userInventory.remove(0);
+            }
+            else if (resp.equals("2")){
+                System.out.println("You have dropped " + userInventory.get(1));
+                userInventory.remove(1);
+            }
+            else if (resp.equals("3")){
+                System.out.println("You have dropped " + userInventory.get(2));
+                userInventory.remove(2);
+            }
+            else if (resp.equals("4")){
+                System.out.println("You have dropped " + userInventory.get(3));
+                userInventory.remove(3);
+            }
+            else if (resp.equals("5")){
+                System.out.println("You have dropped " + userInventory.get(4));
+                userInventory.remove(4);
+            }
+            pause(1000);
+            System.out.println("Now you may go to the store");
+        }
         System.out.println("");
         System.out.println("Which store would you like to visit?");
         System.out.println("Your options are:");
@@ -616,12 +479,7 @@ public class Main{
         System.out.println("");
         if (resp.equals("1")){
             System.out.println("You start walking towards Safeway...");
-            try{ 
-                Thread.sleep(3000);
-            }
-            catch (InterruptedException e){
-                    e.printStackTrace();
-            }
+            pause(2000);
             System.out.println("");
             System.out.println("You arrive at the store and check the last shelf filled with supplies. You see the following items on the shelf:");
             for(int i = 0; i < groceryInventory.size(); i++){
@@ -644,12 +502,7 @@ public class Main{
         }
         else if (resp.equals("2")){
             System.out.println("You start walking towards Walgreens...");
-            try{ 
-                Thread.sleep(2000);
-            }
-            catch (InterruptedException e){
-                    e.printStackTrace();
-            }
+            pause(2000);
             System.out.println("You arrive at the store and check the last shelf filled with supplies. You see the following items on the shelf:");
             for(int i = 0; i < pharmacyInventory.size(); i++){
                 System.out.println(i+1 + ") " + pharmacyInventory.get(i));
@@ -671,12 +524,7 @@ public class Main{
         }
         else if (resp.equals("3")){
             System.out.println("You start walking towards Home Depot...");
-            try{ 
-                Thread.sleep(2000);
-            }
-            catch (InterruptedException e){
-                    e.printStackTrace();
-            }
+            pause(2000);
             System.out.println("You arrive at the store and check the last shelf filled with supplies. You see the following items on the shelf:");
             for(int i = 0; i < hardwareInventory.size(); i++){
                 System.out.println(i+1 + ") " + hardwareInventory.get(i));
@@ -696,20 +544,10 @@ public class Main{
                 System.out.println("You have added " + hardwareInventory.get(2) + "to your inventory");
             }
         }
-        try{ 
-            Thread.sleep(1000);
-        }
-        catch (InterruptedException e){
-                e.printStackTrace();
-        }
+        pause(2000);
         System.out.println("");
         System.out.println("With your items secured, you head back to your base. Be wary- the aliens come out at evening");
-        try{ 
-            Thread.sleep(1000);
-        }
-        catch (InterruptedException e){
-                e.printStackTrace();
-        }
+        pause(3000);
         //this is the method for going to the store, seeing the display, and choosing to pick up max 2 items 
         //if you already have 5 items, you have to drop items to get more 
     }
@@ -759,6 +597,95 @@ public class Main{
         }
         else{
             System.out.println("Your base is at full strength. There are no repairs to be made.");
+        }
+    }
+
+    public static void eat(){
+        System.out.println("");
+        System.out.println("Select a food item in your inventory");
+        System.out.println("");
+        tempInventory.clear();
+        displaySelectInventory(1);
+        if(foodAvailable == true){
+            String resp = collector.nextLine();
+            //include inventory max of 5 items whenever option comes up to add item 
+            if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
+                user.plusHealth(tempInventory.get(0).getHealthBoost());
+                System.out.println("You have consumed " + tempInventory.get(0).getName() + ".");
+                findAndRemove(0);
+            }
+            else if (resp.equals("2") || resp.equals(" 2")){ //for consuming item 2(index 1)
+                user.plusHealth(tempInventory.get(1).getHealthBoost());
+                System.out.println("You have consumed " + tempInventory.get(1).getName() + ".");
+                findAndRemove(1);
+            }
+            else if (resp.equals("3") || resp.equals(" 3")){ //for consuming item 3(index 2)
+                user.plusHealth(tempInventory.get(2).getHealthBoost());
+                System.out.println("You have consumed " + tempInventory.get(2).getName() + ".");
+                findAndRemove(2);
+            }
+            else if (resp.equals("4") || resp.equals(" 4")){ //for consuming item 4(index 3)
+                user.plusHealth(tempInventory.get(3).getHealthBoost());
+                System.out.println("You have consumed " + tempInventory.get(3).getName() + ".");
+                findAndRemove(3);
+            }
+            else if (resp.equals("5") || resp.equals(" 5")){ //for consuming item 5(index 4)
+                user.plusHealth(tempInventory.get(4).getHealthBoost());
+                System.out.println("You have consumed " + tempInventory.get(4).getName() + ".");
+                findAndRemove(4);
+            }
+            else{
+                System.out.println("That is not a valid selection. Please try again and make sure to enter a number");
+                eat();
+            }
+            foodAvailable = false;
+        }
+    }
+
+    public static void takeMedicine(){
+        System.out.println("");
+        System.out.println("Select a medical item in your inventory");
+        System.out.println("");
+        tempInventory.clear();
+        displaySelectInventory(2);
+        if (medicineAvailable == true){
+            String resp = collector.nextLine();
+            //include inventory max of 5 items whenever option comes up to add item 
+        if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
+            user.plusHealth(tempInventory.get(0).getHealthBoost());
+            System.out.println("You have used " + tempInventory.get(0).getName() + ".");
+            System.out.println("Your health is now at: " + user.getHealth());
+            findAndRemove(0);
+        }
+        else if (resp.equals("2") || resp.equals(" 2")){ //for consuming item 2(index 1)
+            user.plusHealth(tempInventory.get(1).getHealthBoost());
+            System.out.println("You have used " + tempInventory.get(1).getName() + ".");
+            System.out.println("Your health is now at: " + user.getHealth());
+            findAndRemove(1);
+        }
+        else if (resp.equals("3") || resp.equals(" 3")){ //for consuming item 3(index 2)
+            user.plusHealth(tempInventory.get(2).getHealthBoost());
+            System.out.println("You have used " + userInventory.get(2).getName() + ".");
+            System.out.println("Your health is now at: " + user.getHealth());
+            findAndRemove(2);
+        }
+        else if (resp.equals("4") || resp.equals(" 4")){ //for consuming item 4(index 3)
+            user.plusHealth(tempInventory.get(3).getHealthBoost());
+            System.out.println("You have used " + tempInventory.get(3).getName() + ".");
+            System.out.println("Your health is now at: " + user.getHealth());
+            findAndRemove(3);
+        }
+        else if (resp.equals("5") || resp.equals(" 5")){ //for consuming item 5(index 4)
+            user.plusHealth(tempInventory.get(4).getHealthBoost());
+            System.out.println("You have used " + tempInventory.get(4).getName() + ".");
+            System.out.println("Your health is now at: " + user.getHealth());
+            findAndRemove(4);
+        }
+        else{
+            System.out.println("That is not a valid selection. Please try again and make sure to enter a number");
+            takeMedicine();
+        }
+        medicineAvailable = false;
         }
     }
 
