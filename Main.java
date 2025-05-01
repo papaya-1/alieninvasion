@@ -512,7 +512,6 @@ public class Main{
             }
         }
         else{
-            System.out.println("There are no food items in your inventory");
             if (x == 1){
                 System.out.println("");
                     System.out.println("You will not be able to eat anything today :(");
