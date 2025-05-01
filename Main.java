@@ -554,34 +554,59 @@ public class Main{
 
     public static void repair(){
         // repairing house 
-        if(chosen.getProtectionLevel() <= 100){
+        if(chosen.getProtectionLevel() >= 100){
             if (userInventory.size() != 0){
                 tempInventory.clear();
                 displaySelectInventory(3);
                 if (repairAvailable == true){
                     String resp = collector.nextLine();
                     if (resp.equals("1")){
+                        if((chosen.getProtectionLevel()+ tempInventory.get(0).getDefBoost()) > 100){
+                            chosen.setProtectionLevel(100);
+                        }
+                        else{
                         chosen.addProtection(tempInventory.get(0).getDefBoost());
+                        }
                         System.out.println("Your base's strength is now at " + chosen.getProtectionLevel() + "/100.");
                         findAndRemove(0);
                     }
                     else if (resp.equals("2")){
+                        if((chosen.getProtectionLevel()+ tempInventory.get(1).getDefBoost()) > 100){
+                            chosen.setProtectionLevel(100);
+                        }
+                        else{
                         chosen.addProtection(tempInventory.get(1).getDefBoost());
+                        }
                         System.out.println("Your base's strength is now at " + chosen.getProtectionLevel() + "/100.");
                         findAndRemove(1);
                     }
                     else if (resp.equals("3")){
+                        if((chosen.getProtectionLevel()+ tempInventory.get(2).getDefBoost()) > 100){
+                            chosen.setProtectionLevel(100);
+                        }
+                        else{
                         chosen.addProtection(tempInventory.get(2).getDefBoost());
+                        }
                         System.out.println("Your base's strength is now at " + chosen.getProtectionLevel() + "/100.");
                         findAndRemove(2);
                     }
                     else if (resp.equals("4")){
+                        if((chosen.getProtectionLevel()+ tempInventory.get(3).getDefBoost()) > 100){
+                            chosen.setProtectionLevel(100);
+                        }
+                        else{
                         chosen.addProtection(tempInventory.get(3).getDefBoost());
+                        }
                         System.out.println("Your base's strength is now at " + chosen.getProtectionLevel() + "/100.");
                         findAndRemove(3);
                     }
                     else if (resp.equals("5")){
+                        if((chosen.getProtectionLevel()+ tempInventory.get(4).getDefBoost()) > 100){
+                            chosen.setProtectionLevel(100);
+                        }
+                        else{
                         chosen.addProtection(tempInventory.get(4).getDefBoost());
+                        }
                         System.out.println("Your base's strength is now at " + chosen.getProtectionLevel() + "/100.");
                         findAndRemove(4);
                     }
@@ -609,27 +634,52 @@ public class Main{
             String resp = collector.nextLine();
             //include inventory max of 5 items whenever option comes up to add item 
             if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
-                user.plusHealth(tempInventory.get(0).getHealthBoost());
+                if((user.getHealth()+tempInventory.get(0).getHealthBoost()) > 100){
+                    user.setHealth(100);
+                }
+                else{
+                    user.plusHealth(tempInventory.get(0).getHealthBoost());
+                }
                 System.out.println("You have consumed " + tempInventory.get(0).getName() + ".");
                 findAndRemove(0);
             }
             else if (resp.equals("2") || resp.equals(" 2")){ //for consuming item 2(index 1)
-                user.plusHealth(tempInventory.get(1).getHealthBoost());
+                if((user.getHealth()+tempInventory.get(1).getHealthBoost()) > 100){
+                    user.setHealth(100);
+                }
+                else{
+                    user.plusHealth(tempInventory.get(1).getHealthBoost());
+                }
                 System.out.println("You have consumed " + tempInventory.get(1).getName() + ".");
                 findAndRemove(1);
             }
             else if (resp.equals("3") || resp.equals(" 3")){ //for consuming item 3(index 2)
-                user.plusHealth(tempInventory.get(2).getHealthBoost());
+                if((user.getHealth()+tempInventory.get(2).getHealthBoost()) > 100){
+                    user.setHealth(100);
+                }
+                else{
+                    user.plusHealth(tempInventory.get(2).getHealthBoost());
+                }
                 System.out.println("You have consumed " + tempInventory.get(2).getName() + ".");
                 findAndRemove(2);
             }
             else if (resp.equals("4") || resp.equals(" 4")){ //for consuming item 4(index 3)
-                user.plusHealth(tempInventory.get(3).getHealthBoost());
+                if((user.getHealth()+tempInventory.get(3).getHealthBoost()) > 100){
+                    user.setHealth(100);
+                }
+                else{
+                    user.plusHealth(tempInventory.get(3).getHealthBoost());
+                }
                 System.out.println("You have consumed " + tempInventory.get(3).getName() + ".");
                 findAndRemove(3);
             }
             else if (resp.equals("5") || resp.equals(" 5")){ //for consuming item 5(index 4)
+                if((user.getHealth()+tempInventory.get(4).getHealthBoost()) > 100){
+                    user.setHealth(100);
+                }
+                else{
                 user.plusHealth(tempInventory.get(4).getHealthBoost());
+                }
                 System.out.println("You have consumed " + tempInventory.get(4).getName() + ".");
                 findAndRemove(4);
             }
@@ -650,31 +700,56 @@ public class Main{
             String resp = collector.nextLine();
             //include inventory max of 5 items whenever option comes up to add item 
         if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
-            user.plusHealth(tempInventory.get(0).getHealthBoost());
+            if((user.getHealth()+tempInventory.get(0).getHealthBoost()) > 100){
+                user.setHealth(100);
+            }
+            else{
+                user.plusHealth(tempInventory.get(0).getHealthBoost());
+            }
             System.out.println("You have used " + tempInventory.get(0).getName() + ".");
             System.out.println("Your health is now at: " + user.getHealth());
             findAndRemove(0);
         }
         else if (resp.equals("2") || resp.equals(" 2")){ //for consuming item 2(index 1)
-            user.plusHealth(tempInventory.get(1).getHealthBoost());
+            if((user.getHealth()+tempInventory.get(1).getHealthBoost()) > 100){
+                user.setHealth(100);
+            }
+            else{
+                user.plusHealth(tempInventory.get(1).getHealthBoost());
+            }
             System.out.println("You have used " + tempInventory.get(1).getName() + ".");
             System.out.println("Your health is now at: " + user.getHealth());
             findAndRemove(1);
         }
         else if (resp.equals("3") || resp.equals(" 3")){ //for consuming item 3(index 2)
-            user.plusHealth(tempInventory.get(2).getHealthBoost());
+            if((user.getHealth()+tempInventory.get(2).getHealthBoost()) > 100){
+                user.setHealth(100);
+            }
+            else{
+                user.plusHealth(tempInventory.get(2).getHealthBoost());
+            }
             System.out.println("You have used " + userInventory.get(2).getName() + ".");
             System.out.println("Your health is now at: " + user.getHealth());
             findAndRemove(2);
         }
         else if (resp.equals("4") || resp.equals(" 4")){ //for consuming item 4(index 3)
-            user.plusHealth(tempInventory.get(3).getHealthBoost());
+            if((user.getHealth()+tempInventory.get(3).getHealthBoost()) > 100){
+                user.setHealth(100);
+            }
+            else{
+                user.plusHealth(tempInventory.get(3).getHealthBoost());
+            }
             System.out.println("You have used " + tempInventory.get(3).getName() + ".");
             System.out.println("Your health is now at: " + user.getHealth());
             findAndRemove(3);
         }
         else if (resp.equals("5") || resp.equals(" 5")){ //for consuming item 5(index 4)
+            if((user.getHealth()+tempInventory.get(4).getHealthBoost()) > 100){
+                user.setHealth(100);
+            }
+            else{
             user.plusHealth(tempInventory.get(4).getHealthBoost());
+            }
             System.out.println("You have used " + tempInventory.get(4).getName() + ".");
             System.out.println("Your health is now at: " + user.getHealth());
             findAndRemove(4);
