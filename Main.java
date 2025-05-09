@@ -365,12 +365,12 @@ public class Main{
         int index = 1;
         int numOf = 0;
         for(int i = 0; i < userInventory. size(); i++){
-                if(userInventory.get(i).getType() == x){
+                if(userInventory.get(i).getType() == x){ //checks if there any any of type x 
                     numOf++;
                 }
         }
         if(numOf > 0){
-            if (x == 1){
+            if (x == 1){ //checks what type x is 
                 foodAvailable = true;
             }
             else if (x == 2){
@@ -379,6 +379,8 @@ public class Main{
             else if (x == 3){
                 repairAvailable = true;
             }
+            System.out.println("");
+            System.out.println("In your inventory you have:");
             for (int i = 0; i < userInventory.size(); i++){
                 if(userInventory.get(i).getType() == x){
                 tempInventory.add(userInventory.get(i));
@@ -647,10 +649,10 @@ public class Main{
         // repairing house 
         if(chosen.getProtectionLevel() <= 100){
             if (userInventory.size() != 0){
+                tempInventory.clear();
+                displaySelectInventory(3);
                 if (repairAvailable == true){
-                    tempInventory.clear();
                     System.out.println("Choose a tool to repair your base: ");
-                    displaySelectInventory(3);
                     String resp = collector.nextLine();
                     if (resp.equals("1")){
                         if((chosen.getProtectionLevel()+ tempInventory.get(0).getDefBoost()) > 100){
@@ -703,9 +705,6 @@ public class Main{
                         findAndRemove(4);
                     }
                     repairAvailable = false;
-                }
-                else{
-                    System.out.println("You have no tools to conduct repairs");
                 }
             }
             else{
