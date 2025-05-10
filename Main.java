@@ -407,7 +407,7 @@ public class Main{
 
     public static void possibleAlienEncounter(int x){
         int chance = (int)(Math.random()*101); 
-        chance -= x*3;
+        chance += x*3;
         if (chance <=50){
             System.out.println("");
             System.out.println("You have made it through without encountering an alien");
