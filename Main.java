@@ -116,6 +116,9 @@ public class Main{
                 dayNum++;
             }
         }
+        if (user.getIsAlive() == false){
+            System.out.println("You have died.");
+        }
     }
 
     public static void findAndRemove(int index){
@@ -276,46 +279,47 @@ public class Main{
         pause(4000);
     }
     
-    public static void enactNight(User user, Base chosen){
+    public static void enactNight(User user, Base x){
         System.out.println("It is now  nighttime and you must sleep to prepare for yout next day. Take the next few moments to rest up. Zzzzzz Zzzzzzzzzzzzz Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
         System.out.println("(please wait a moment for the next morning to start)");
         System.out.println("");
         pause(5000);
-        chosen.setProtectionLevel(chosen.getProtectionLevel()-10);
+        x.setProtectionLevel(x.getProtectionLevel()-10);
         //if a base falls
-        if (chosen.getProtectionLevel() <= 0){
-            chosen.setDestroyed(true);
-            if (chosen.getName().equals("shack")){
+        if (x.getProtectionLevel() <= 0){
+            x.setDestroyed(true);
+            if (x.getName().equals("shack")){
                 a.setDestroyed(true);
             }
-            else if (chosen.getName().equals("apartment")){
+            else if (x.getName().equals("apartment")){
                 b.setDestroyed(true);
             }
-            else if (chosen.getName().equals("house")){
+            else if (x.getName().equals("house")){
                 c.setDestroyed(true);
             }
             System.out.println("You wake up to your shelter crumbling around you. Your base has been destroyed by alien attacks");
             System.out.println("You must travel to a new base and might be attacked by aliens. Here are your options for a base:");
             int index = 1;
             boolean atLeastOne = false;
-            ArrayList<Integer> indexes = new ArrayList<Integer>();
+            ArrayList<Integer> indexes = new ArrayList<Integer>(); //basically the base options
             for(int i = 0; i < baseList.length; i++){
                 if (baseList[i].getDestroyed() == false){
                     System.out.println(index + ") " + baseList[i]);
                     indexes.add(i);
                     atLeastOne = true;
+                    index++;
                 }
             }
             if(atLeastOne == false){
                 System.out.println("With no available bases, you are exposed to alien attacks...");
                 pause(2000);
-                System.out.println("You have died!");
+                user.setIsAlive(false);
             }
             else{
                 String resp = collector.nextLine();
                 if(resp.equals("1")){
                     chosen = baseList[indexes.get(0)];
-                    System.out.println("You head towards your new base " + chosen);
+                    System.out.println("You head towards your new base, the " + chosen);
                     System.out.println("As you head there, you are wary of the chance that you could be attacked by aliens");
                 }
                 else if (resp.equals("2")){
@@ -330,7 +334,8 @@ public class Main{
                 System.out.println("You make it to your base and rest up for the rest of the night. You loose 10 health due to lack of sleep");
                 user.setHealth(user.getHealth() - 10);
                 if (user.getHealth() <= 0){
-                    System.out.println("It looks like that was the last straw. You have died");
+                    System.out.println("It looks like that was the last straw.");
+                    user.setIsAlive(false);
                 }
                 pause(2000);
             }
@@ -340,6 +345,10 @@ public class Main{
         }
         else{
             user.setHealth(user.getHealth() - 10 + dailyExtra);
+            if(user.getHealth() <= 0){
+                System.out.println("Unfortunately, you have neglected to take care of your health");
+                user.setIsAlive(false);
+            }
             //+ 5 health for sleeping 
             //- 15 health for food 
             //+ dailyExtra for excessFood that was capped off due to 100 limit
@@ -468,7 +477,6 @@ public class Main{
                 }
             }
             if (user.getHealth() <= 0){
-                System.out.println("You have died");
                 user.setIsAlive(false);
             }
         }
