@@ -38,4 +38,8 @@ public class Place{
     public void setY(int a){
         y = a;
     }
+
+    public String toString(){
+        return "a " + getName() + "at coordinates (" + getX() + "," + getY() + ")";
+    }
 }

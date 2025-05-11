@@ -14,6 +14,8 @@ public class Main{
         static boolean medicineAvailable = false;
         static boolean repairAvailable = false; 
         static int dailyExtra = 0;
+        //for user saying stop 
+        static boolean userQuits = false;
         //keeps track of store inventory 
         static ArrayList<Item> hardwareInventory = new ArrayList<Item>();
         static ArrayList<Item> groceryInventory = new ArrayList<Item>();
@@ -74,11 +76,12 @@ public class Main{
         System.out.println("You come home from summer break to find that your town has been invaded by aliens!");
         System.out.println("No one else is around, but luckily help is arriving in 12 days.");
         System.out.println("You'll need to survive by finding a base, maintaining it, geting food and medicine to keep your health up, and surviving alien attacks until help arrives.");
+        System.out.println("Type 'stop' when prompted to answer in order to quit the game.");
         System.out.println("Note: to select any options in this game, you must choose a number");
         System.out.println("");
         //pause between introduction and start of game  
         pause(6000);
-        while(dayNum <= 12 && user.getIsAlive()){ //loop for 12 days game simulation 
+        while(dayNum <= 12 && user.getIsAlive() && !userQuits){ //loop for 12 days game simulation 
             if(dayNum == 12){ //game sim for day 12 
                 System.out.println("You have been saved! /(^^)/");
             }
@@ -150,6 +153,9 @@ public class Main{
 
     public static void getResponse(String x){
         //getResponse provides the computers responses for the day sim + base selection 
+        if (x.equals("stop") || x.equals("Stop")){
+                userQuits = true;
+        }
         if (baseSelected == false){ // when user has selected base
             System.out.println("");
             if (x.equals("1") || x.equals(" 1")){ //choosing shack
