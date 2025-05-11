@@ -346,7 +346,7 @@ public class Main{
         else{
             user.setHealth(user.getHealth() - 10 + dailyExtra);
             if(user.getHealth() <= 0){
-                System.out.println("Unfortunately, you have neglected to take care of your health");
+                System.out.println("Unfortunately, you have neglected to take care of your health.");
                 user.setIsAlive(false);
             }
             //+ 5 health for sleeping 
@@ -354,9 +354,10 @@ public class Main{
             //+ dailyExtra for excessFood that was capped off due to 100 limit
             //encourages user to eat 
         }
-        System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health a little. If you haven't eaten, you will notice a drop in your health. Currently your health is at  "+ user.getHealth());
-        pause(4000);
-
+        if (user.getIsAlive() == true){
+            System.out.println("Good morning! Hope you slept well! During the night their was some attacks on your base, but luckly your base held them out. Nevertheless, your base took some hits and needs to be kept up. Base protection level is now at "+ chosen.getProtectionLevel()+", but sleeping has boosted your health a little. If you haven't eaten, you will notice a drop in your health. Currently your health is at  "+ user.getHealth());
+            pause(4000);
+        }
     }
 
     public static void displayInventory(){
