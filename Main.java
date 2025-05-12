@@ -82,6 +82,9 @@ public class Main{
             if(dayNum == 12){ //game sim for day 12 
                 System.out.println("You have been saved! /(^^)/");
             }
+           // if(shouldStop()){
+            //    end();
+           // }
             else if(dayNum == 1){ //game sim for 1st day- it is seperate since it has an additional step which is base selection 
                 System.out.println("Let's start with finding a base! Remember to choose wisely as your base plays a major role in your survival.");
                 pause(2000);
@@ -98,7 +101,8 @@ public class Main{
                 System.out.println("3)The" + c);
                 System.out.println("");
                 System.out.println("Pick your base");
-                String resp = collector.nextLine();
+               // String resp = ();
+                String resp = getPlayerInput();
                 getResponse(resp); //gets the computer's response for base selection. the other days don't use this method since, enactDay itself calls getResponse
                 enactDay(); //begins the game sim 
                 enactNight(user,chosen); //begins the game sim for nightime 
@@ -173,7 +177,7 @@ public class Main{
             else{ //user error 
                 System.out.println("That is not a valid selection. Please try again and make sure to enter a number");
                 //recursion, so user can make the right choice 
-                String resp = collector.nextLine();
+                String resp = getPlayerInput();
                 getResponse(resp);
                 baseSelected = false; 
             }
@@ -197,7 +201,7 @@ public class Main{
             }
             else{
                 System.out.println("That is not a valid selection. Please try again and make sure to enter a number");
-                String resp = collector.nextLine();
+                String resp = getPlayerInput();
                 getResponse(resp);
             }
         }
@@ -219,7 +223,7 @@ public class Main{
             }
             else{
                 System.out.println("That is not a valid selection. Please try again and make sure to enter a number");
-                String resp = collector.nextLine();
+                String resp = getPlayerInput();
                 getResponse(resp);
             }
         }
@@ -239,7 +243,7 @@ public class Main{
             }
             else{
                 System.out.println("That is not a valid selection. Please try again and make sure to enter a number");
-                String resp = collector.nextLine();
+                String resp = getPlayerInput();
                 getResponse(resp);
             }
         }
@@ -257,20 +261,20 @@ public class Main{
         System.out.println("1. Eat");
         System.out.println("2. Check inventory/stats");
         System.out.println("3. Take medicine");
-        String resp = collector.nextLine();
+        String resp = getPlayerInput();
         getResponse(resp);
         System.out.println("");
         System.out.println("Now choose your daily activity...");
         System.out.println("1. Go to store/gather supplies");
         System.out.println("2. Make repairs to your house");
         System.out.println("3. Stay home (with this choice, you essentually foreit doing an afternoon activity today)");
-        resp = collector.nextLine();
+        resp = getPlayerInput();
         getResponse(resp);
         System.out.println("The day is coming to an end! Choose your evening activity");
         System.out.println("1. Eat");
         System.out.println("2. Check inventory/stats");
         System.out.println("3. Take medicine");
-        resp = collector.nextLine();
+        resp = getPlayerInput();
         getResponse(resp);
         pause(2000);
         System.out.println("");
@@ -316,7 +320,7 @@ public class Main{
                 user.setIsAlive(false);
             }
             else{
-                String resp = collector.nextLine();
+                String resp = getPlayerInput();
                 if(resp.equals("1")){
                     chosen = baseList[indexes.get(0)];
                     System.out.println("You head towards your new base, the " + chosen);
@@ -429,7 +433,7 @@ public class Main{
             System.out.println("1) Run away, but end activity, lose all inventory, and potentially lose health (90% success)");
             System.out.println("2) Defend, and potentiallly lose health (40% success)");
             System.out.println("3) Attack, and potentially lose health and all inventory(60% success)");
-            String resp = collector.nextLine();
+            String resp = getPlayerInput();
             System.out.println("");
             int success = (int)(Math.random()*101); 
             if (resp.equals("1")){
@@ -499,7 +503,7 @@ public class Main{
             System.out.println("");
             System.out.println("There are too many items in your inventory to go to the store. You must drop something. Choose something to drop. Here is your inventory for reference: ");
             displayInventory();
-            String resp = collector.nextLine();
+            String resp = getPlayerInput();
             System.out.println("");
             if(resp.equals("1")){
                 System.out.println("You have dropped " + userInventory.get(0));
@@ -531,7 +535,7 @@ public class Main{
         System.out.println("2) The Pharmacy with a distance away of " + y);
         System.out.println("3) The Hardware Store with a distance away of " + z);
         System.out.println("The further away the store, the higher chance you will be attacked by an alien on the way there.");
-        String resp = collector.nextLine();
+        String resp = getPlayerInput();
         System.out.println("");
         if (resp.equals("1")){
             userDis = x;
@@ -543,7 +547,7 @@ public class Main{
                 System.out.println(i+1 + ") " + groceryInventory.get(i));
             }
             System.out.println("Select the item you want to pick up");
-            String resp2 = collector.nextLine();
+            String resp2 = getPlayerInput();
             if (resp2.equals("1")){
                 userInventory.add(groceryInventory.get(0));
                 System.out.println("You have added " + groceryInventory.get(0) + " to your inventory");
@@ -580,7 +584,7 @@ public class Main{
                 System.out.println(i+1 + ") " + pharmacyInventory.get(i));
             }
             System.out.println("Select the item you want to pick up");
-            String resp2 = collector.nextLine();
+            String resp2 = getPlayerInput();
             if (resp2.equals("1")){
                 userInventory.add(pharmacyInventory.get(0));
                 System.out.println("You have added " + pharmacyInventory.get(0) + " to your inventory");
@@ -617,7 +621,7 @@ public class Main{
                 System.out.println(i+1 + ") " + hardwareInventory.get(i));
             }
             System.out.println("Select the item you want to pick up");
-            String resp2 = collector.nextLine();
+            String resp2 = getPlayerInput();
             if (resp2.equals("1")){
                 userInventory.add(hardwareInventory.get(0));
                 System.out.println("You have added " + hardwareInventory.get(0) + " to your inventory");
@@ -662,7 +666,7 @@ public class Main{
                 displaySelectInventory(3);
                 if (repairAvailable == true){
                     System.out.println("Choose a tool to repair your base: ");
-                    String resp = collector.nextLine();
+                    String resp = getPlayerInput();
                     if (resp.equals("1")){
                         if((chosen.getProtectionLevel()+ tempInventory.get(0).getDefBoost()) > 100){
                             chosen.setProtectionLevel(100);
@@ -731,7 +735,7 @@ public class Main{
         tempInventory.clear();
         displaySelectInventory(1);
         if(foodAvailable == true){
-            String resp = collector.nextLine();
+            String resp = getPlayerInput();
             //include inventory max of 5 items whenever option comes up to add item 
             if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
                 if((user.getHealth()+tempInventory.get(0).getHealthBoost()) > 100){
@@ -802,7 +806,7 @@ public class Main{
         tempInventory.clear();
         displaySelectInventory(2);
         if (medicineAvailable == true){
-            String resp = collector.nextLine();
+            String resp = getPlayerInput();
             //include inventory max of 5 items whenever option comes up to add item 
         if (resp.equals("1") || resp.equals(" 1")){ // for consuming item 1(index 0)
             if((user.getHealth()+tempInventory.get(0).getHealthBoost()) > 100){
@@ -866,5 +870,31 @@ public class Main{
         medicineAvailable = false;
         }
     }
+   /*  public static boolean shouldStop(){
+        System.out.println("Type stop to end");
+        String input = collector.nextLine();
+
+        if(input.equalsIgnoreCase("stop")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+         */
+    public static void end(){
+        System.out.println("You have ended your game. Thanks for playing!");
+        System.exit(0);
+    } 
+   public static String getPlayerInput(){
+    String input = collector.nextLine();
+    if(input.equalsIgnoreCase("stop")){
+        end();
+        return ("");
+    }
+    else{
+        return input;
+    }
+   }
 
 }
