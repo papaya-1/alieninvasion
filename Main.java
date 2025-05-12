@@ -74,7 +74,7 @@ public class Main{
         System.out.println("You come home from summer break to find that your town has been invaded by aliens!");
         System.out.println("No one else is around, but luckily help is arriving in 12 days.");
         System.out.println("You'll need to survive by finding a base, maintaining it, geting food and medicine to keep your health up, and surviving alien attacks until help arrives.");
-        System.out.println("Note: to select any options in this game, you must choose a number");
+        System.out.println("Note: to select any options in this game, you must choose a number. To quit, type 'stop'.");
         System.out.println("");
         //pause between introduction and start of game  
         pause(6000);
